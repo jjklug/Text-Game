@@ -1,4 +1,4 @@
-/*
+
 package gameplay;
 
 import java.util.ArrayList;
@@ -17,12 +17,12 @@ public class Inventory
 	//------------------------------------
 	public String toString()
 	{	
-		String out = "";		
+		String out = "";
 		for(Pickup p : items)
 		{
 			if(p!=null)
 			{
-				out+= p+",";
+				out += p + ",";
 			}
 		}
 		if(out.isEmpty()) out = "nothing";

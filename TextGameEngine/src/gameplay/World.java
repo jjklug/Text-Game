@@ -1,4 +1,5 @@
 
+
 package gameplay;
 
 public class World {
@@ -8,14 +9,11 @@ public class World {
     PlayMode mode;
 
 
-
-
-
     //--------------------------------------------------------
     public void onEnterRoom()
-	{
+    {
 
-	}
+    }
     //--------------------------------------------------------
     public void play(Player player)
     {
@@ -39,6 +37,12 @@ public class World {
         }
     }
     //--------------------------------------------------------
+    private void processExploreUserInput(){
 
+    }
+
+    private void processBattleUserInput(){
+
+    }
     //--------------------------------------------------------
 }
