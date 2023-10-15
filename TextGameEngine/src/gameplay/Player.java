@@ -1,5 +1,9 @@
 package gameplay;
 
+
+import Entities.Character;
+import Entities.*;
+
 public class Player
 {
     private String name;
@@ -19,14 +23,37 @@ public class Player
         this.confidence = confidence;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String n){
+        this.name = n;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void setHealth(int h){
+        this.health = h;
+    }
+
+    public int getConfidence(){
+        return confidence;
+    }
+
+    public void setConfidence(int c) {
+        this.confidence = c;
+    }
+
     /**
      * Uses the confidence and the weapons power level to determine the amt of damage that will be dealth
      * @return damage that will be dealt to enemy
      */
     protected int dealAttackDamage(){
         int h = weapon.hit();
-        int d = h + ((h*confidence)/100);
-        return d;
+        return h + ((h*confidence)/100);
     }
 
     /**

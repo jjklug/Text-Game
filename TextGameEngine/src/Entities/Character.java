@@ -1,10 +1,14 @@
+package Entities;
+
+import gameplay.Entity;
+
 /**
- * Character class - Jack Klug
+ * Entities.Character class - Jack Klug
  * represents the entities that will include playable characters and monsters
  * these characters have a health value and are able to do damage as well as take it
  */
 
-abstract class Character extends Entity{
+public abstract class Character extends Entity {
     private int hp;
 
     public Character(int hp){

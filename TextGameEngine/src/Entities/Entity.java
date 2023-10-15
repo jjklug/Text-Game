@@ -1,7 +1,9 @@
+package Entities;
+
 import java.util.Random;
 
 /**
- * Entity class - Jack Klug
+ * Entities.Entity class - Jack Klug
  * Class that builds the baseline framework for any item that will be used in the game
  * super generic that provides each entity with the most basic of attributes and functions
  */

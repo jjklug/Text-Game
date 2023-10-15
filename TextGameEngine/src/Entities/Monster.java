@@ -1,10 +1,13 @@
+package Entities;
+
 /**
- * Monster class - Jack Klug
+ * Entities.Monster class - Jack Klug
  * This class is used to represent the monsters that will appear throughout the game
  * They will be able to attack the user and the user must defend against them
  */
+import Entities.Character;
 
-class Monster extends Character{
+public class Monster extends Character {
     private int prob;
     private int damage;
 

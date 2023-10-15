@@ -1,12 +1,14 @@
+package gameplay;
+
+import Entities.*;
+
 /**
- * Room Class - Jack Klug
+ * gameplay.Room Class - Jack Klug
  * This class is used to represent the rooms that will make up the layout of the game
  *
  */
 
-package gameplay;
-
-class Room{
+public class Room extends Entity {
     private boolean isFinal;
 
     private Room[] connectingRooms;
@@ -14,14 +16,14 @@ class Room{
     private Inventory pickupsInRoom;
 
     public Room(){
-        description = null;
+        super(null);
         pickupsInRoom = null;
         connectingRooms = null;
     }
 
     public Room(String description,Inventory pickupsInRoom,
                 Room[] connectingRooms){
-        this.description = description;
+        super(description);
         this.pickupsInRoom = pickupsInRoom;
 
     }

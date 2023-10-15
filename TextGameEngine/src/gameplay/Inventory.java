@@ -3,6 +3,7 @@ package gameplay;
 
 import java.util.ArrayList;
 
+import Entities.Pickup;
 import pickups.Pickup;
 
 public class Inventory 
@@ -70,4 +71,3 @@ public class Inventory
 		return items;
 	}
 }
-*/
