@@ -31,7 +31,7 @@ public class Player
 
     /**
      * takes the damage for the player from an enemy attack
-     * aslso decreases confidence by half the damage value
+     * also decreases confidence by half the damage value
      * @param enemy what enemy they are fighting
      * @return damage they took from the fight
      */
