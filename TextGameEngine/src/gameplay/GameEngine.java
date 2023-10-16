@@ -3,6 +3,7 @@ package gameplay;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
 import playercommand_grammar.PlayerCommandLexer;
 import playercommand_grammar.PlayerCommandParser;
 
@@ -17,7 +18,8 @@ public class GameEngine
         String input = scanner.nextLine();
         PlayerCommandLexer lexer = new PlayerCommandLexer(CharStreams.fromString(input));
         PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
-        Token token = lexer.nextToken();
+        ParseTree tree = parser.prog();
+        //Token token = lexer.nextToken();
 
         //read the World object instance from a text file or literal
         //World world = ReadWorldDataFile.basicWorld();
