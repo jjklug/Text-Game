@@ -1,6 +1,6 @@
 package Entities;
 
-import gameplay.Entity;
+
 
 /**
  * Entities.Character class - Jack Klug
@@ -12,16 +12,19 @@ public abstract class Character extends Entity {
     private int hp;
 
     public Character(int hp){
-        super(desc);
-        if(hp >= 0){
-            this.hp = hp;
-        }
-        else{
-            this.hp = 0;
-        }
+        super("Character");
+        this.hp = Math.max(hp,0);
     }
 
-    protected abstract int dealAttackDamage();
+    public int getHp(){
+        return hp;
+    }
+
+    public void setHp(int hp){
+        this.hp = hp;
+    }
+
+    public abstract int dealAttackDamage();
 
     public abstract int defendAttack(Character enemy);
 }

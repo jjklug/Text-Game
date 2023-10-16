@@ -4,9 +4,9 @@ package gameplay;
 import java.util.ArrayList;
 
 import Entities.Pickup;
-import pickups.Pickup;
 
-public class Inventory 
+
+public class Inventory
 {
 	
 	private ArrayList<Pickup> items;

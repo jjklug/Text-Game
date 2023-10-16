@@ -4,11 +4,9 @@ package gameplay;
 import Entities.Character;
 import Entities.*;
 
-public class Player
+public class Player extends Character
 {
     private String name;
-
-    private int health;
 
     private int confidence;
 
@@ -16,10 +14,12 @@ public class Player
 
     private Inventory inventory;
 
-    public Player(String name,int health,int confidence)
+    public Player(String name,int hp, int confidence)
     {
+        super(hp);
+        super.setDesc("Player");
         this.name = name;
-        this.health = health;
+        this.hp = hp;
         this.confidence = confidence;
     }
 
@@ -31,14 +31,6 @@ public class Player
         this.name = n;
     }
 
-    public int getHealth(){
-        return health;
-    }
-
-    public void setHealth(int h){
-        this.health = h;
-    }
-
     public int getConfidence(){
         return confidence;
     }
@@ -48,10 +40,10 @@ public class Player
     }
 
     /**
-     * Uses the confidence and the weapons power level to determine the amt of damage that will be dealth
+     * Uses the confidence and the weapons power level to determine the amt of damage that will be dealt
      * @return damage that will be dealt to enemy
      */
-    protected int dealAttackDamage(){
+    public int dealAttackDamage(){
         int h = weapon.hit();
         return h + ((h*confidence)/100);
     }
@@ -63,8 +55,8 @@ public class Player
      * @return damage they took from the fight
      */
     public int defendAttack(Character enemy){
-        d = enemy.dealAttackDamage();
-        health -= d;
+        int d = enemy.dealAttackDamage();
+        hp -= d;
         confidence = confidence - d/2;
         return d;
     }

@@ -27,4 +27,29 @@ public class Room extends Entity {
         this.pickupsInRoom = pickupsInRoom;
 
     }
+
+
+    public boolean getIsFinal() {
+        return isFinal;
+    }
+
+    public void setIsFinal(boolean isFinal) {
+        this.isFinal = isFinal;
+    }
+
+    public Room[] getConnectingRooms() {
+        return connectingRooms;
+    }
+
+    public void setConnectingRooms(Room[] connectingRooms) {
+        this.connectingRooms = connectingRooms;
+    }
+
+    public Inventory getPickupsInRoom() {
+        return pickupsInRoom;
+    }
+
+    public void setPickupsInRoom(Inventory pickupsInRoom) {
+        this.pickupsInRoom = pickupsInRoom;
+    }
 }
