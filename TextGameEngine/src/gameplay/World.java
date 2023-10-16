@@ -48,16 +48,13 @@ public class World {
     //--------------------------------------------------------
     private void processExploreUserInput(){
         enum ExploreCommands {door, pickup, exit, describe, admire, eat, stats, wield, open, help;}
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Command(Explore Mode): ");
-        String input = scanner.nextLine();
-        PlayerCommandLexer lexer = new PlayerCommandLexer(CharStreams.fromString(input));
-        PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
-        Token token = lexer.nextToken();
+        //String input = scanner.nextLine();
+        //PlayerCommandLexer lexer = new PlayerCommandLexer(CharStreams.fromString(input));
+        //PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
+        //Token token = lexer.nextToken();
 
-
-
-        switch (this.
 
     }
 

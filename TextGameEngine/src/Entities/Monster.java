@@ -50,6 +50,7 @@ public class Monster extends Character {
      */
     public int defendAttack(Character enemy){
         int d = enemy.dealAttackDamage();
+        int hp = super.getHp();
         hp -= d;
         return d;
     }
@@ -59,11 +60,11 @@ public class Monster extends Character {
      * @return T/F that says whether monster appears
      */
     public boolean appear(){
-        if(hp == 0){
+        if(super.getHp() == 0){
             return false;
         }
         else{
-            num = super.getRandom(0,101);
+            int num = super.getRandom(0,101);
             return prob <= num;
         }
     }

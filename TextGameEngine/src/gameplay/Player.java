@@ -19,7 +19,6 @@ public class Player extends Character
         super(hp);
         super.setDesc("Player");
         this.name = name;
-        this.hp = hp;
         this.confidence = confidence;
     }
 
@@ -56,6 +55,7 @@ public class Player extends Character
      */
     public int defendAttack(Character enemy){
         int d = enemy.dealAttackDamage();
+        int hp = super.getHp();
         hp -= d;
         confidence = confidence - d/2;
         return d;
