@@ -3,7 +3,7 @@ grammar PlayerCommand;
 /** the start rule, begin parsing here **/
 prog: command+ ;
 
-command : DOOR ID       # doorCommand
+command : DOOR INT      # doorCommand
         | PICKUP ID     # pickup
         | EXIT          # exit
         | DESCRIBE      # describe
@@ -14,6 +14,7 @@ command : DOOR ID       # doorCommand
         | OPEN ID       # openChest
         | HELP          # displayHelp
         | ATTACK        # attackMonster
+        | NEWLINE       # newLine
         ;
 
 DOOR : 'door';
@@ -32,3 +33,4 @@ ID : [a-zA-Z]+ ;
 INT : [0-9]+ ;
 NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
 WS : [ \t]+ -> skip ;
+ANY: . ;

@@ -46,20 +46,103 @@ public class World {
         }
     }
     //--------------------------------------------------------
-    private void processExploreUserInput(){
-        enum ExploreCommands {door, pickup, exit, describe, admire, eat, stats, wield, open, help;}
-        //Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Command(Explore Mode): ");
-        //String input = scanner.nextLine();
-        //PlayerCommandLexer lexer = new PlayerCommandLexer(CharStreams.fromString(input));
-        //PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
-        //Token token = lexer.nextToken();
+    public void processExploreUserInput(){
 
+        //initial variables
+        String command = "";
+        String commandDirection;
+        Token token;
+        int commandIndex;
+        int commandDirectionIndex = 0;
+        boolean valid = false;
+        PlayerCommandLexer lexer = null;
+        Scanner scanner = new Scanner(System.in);
 
+        while(!valid) {
+            commandIndex = -1;
+            while (commandIndex >= 11 || commandIndex <= -1) {
+                System.out.println("Enter Command(Explore Mode): ");
+                String input = scanner.nextLine();
+                lexer = new PlayerCommandLexer(CharStreams.fromString(input));
+                token = lexer.nextToken();
+                command = token.getText();
+                commandIndex = token.getType();
+                System.out.println(command + " " + commandIndex);
+            }
+
+            token = lexer.nextToken();
+            commandDirection = token.getText();
+            commandDirectionIndex = token.getType();
+
+            if(commandIndex == 2 || commandIndex == 5 || commandIndex == 6 || commandIndex == 8 || commandIndex == 9) {
+                valid = (commandDirectionIndex == 12);
+            } else if(commandIndex == 1){
+                valid = (commandDirectionIndex == 13);
+            } else{
+                valid = true;
+            }
+        }
+
+            switch (command){
+                case "door":
+
+                case "pickup":
+
+                case "exit":
+
+                case "describe":
+
+                case "admire":
+
+                case "eat":
+
+                case "stats":
+
+                case "wield":
+
+                case "open":
+
+                case "help":
+
+            }
     }
 
     private void processBattleUserInput(){
 
+        //initial variables
+        String command = "";
+        String commandDirection;
+        Token token;
+        int commandIndex;
+        int commandDirectionIndex = 0;
+        boolean valid = false;
+        PlayerCommandLexer lexer = null;
+        Scanner scanner = new Scanner(System.in);
+
+        while(!valid) {
+            commandIndex = -1;
+            while (commandIndex >= 11 || commandIndex <= -1) {
+                System.out.println("Enter Command(Explore Mode): ");
+                String input = scanner.nextLine();
+                lexer = new PlayerCommandLexer(CharStreams.fromString(input));
+                token = lexer.nextToken();
+                command = token.getText();
+                commandIndex = token.getType();
+                System.out.println(command + " " + commandIndex);
+            }
+
+            token = lexer.nextToken();
+            commandDirection = token.getText();
+            commandDirectionIndex = token.getType();
+
+            if(commandIndex == 2 || commandIndex == 5 || commandIndex == 6 || commandIndex == 8 || commandIndex == 9) {
+                valid = (commandDirectionIndex == 12);
+            } else if(commandIndex == 1){
+                valid = (commandDirectionIndex == 13);
+            } else{
+                valid = true;
+            }
+        }
     }
     //--------------------------------------------------------
 }

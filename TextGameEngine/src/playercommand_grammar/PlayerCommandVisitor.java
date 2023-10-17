@@ -93,4 +93,11 @@ public interface PlayerCommandVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAttackMonster(PlayerCommandParser.AttackMonsterContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code newLine}
+	 * labeled alternative in {@link PlayerCommandParser#command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNewLine(PlayerCommandParser.NewLineContext ctx);
 }

@@ -96,4 +96,11 @@ public class PlayerCommandBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitAttackMonster(PlayerCommandParser.AttackMonsterContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitNewLine(PlayerCommandParser.NewLineContext ctx) { return visitChildren(ctx); }
 }

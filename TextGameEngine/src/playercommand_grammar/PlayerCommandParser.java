@@ -18,7 +18,7 @@ public class PlayerCommandParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		DOOR=1, PICKUP=2, EXIT=3, DESCRIBE=4, ADMIRE=5, EAT=6, STATS=7, WIELD=8, 
-		OPEN=9, HELP=10, ATTACK=11, ID=12, INT=13, NEWLINE=14, WS=15;
+		OPEN=9, HELP=10, ATTACK=11, ID=12, INT=13, NEWLINE=14, WS=15, ANY=16;
 	public static final int
 		RULE_prog = 0, RULE_command = 1;
 	private static String[] makeRuleNames() {
@@ -38,7 +38,7 @@ public class PlayerCommandParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "DOOR", "PICKUP", "EXIT", "DESCRIBE", "ADMIRE", "EAT", "STATS", 
-			"WIELD", "OPEN", "HELP", "ATTACK", "ID", "INT", "NEWLINE", "WS"
+			"WIELD", "OPEN", "HELP", "ATTACK", "ID", "INT", "NEWLINE", "WS", "ANY"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -139,7 +139,7 @@ public class PlayerCommandParser extends Parser {
 				setState(7); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 4094L) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 20478L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -204,7 +204,7 @@ public class PlayerCommandParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class DoorCommandContext extends CommandContext {
 		public TerminalNode DOOR() { return getToken(PlayerCommandParser.DOOR, 0); }
-		public TerminalNode ID() { return getToken(PlayerCommandParser.ID, 0); }
+		public TerminalNode INT() { return getToken(PlayerCommandParser.INT, 0); }
 		public DoorCommandContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -217,6 +217,24 @@ public class PlayerCommandParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof PlayerCommandVisitor ) return ((PlayerCommandVisitor<? extends T>)visitor).visitDoorCommand(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class NewLineContext extends CommandContext {
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
+		public NewLineContext(CommandContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).enterNewLine(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).exitNewLine(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PlayerCommandVisitor ) return ((PlayerCommandVisitor<? extends T>)visitor).visitNewLine(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -374,7 +392,7 @@ public class PlayerCommandParser extends Parser {
 		CommandContext _localctx = new CommandContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_command);
 		try {
-			setState(26);
+			setState(27);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case DOOR:
@@ -384,7 +402,7 @@ public class PlayerCommandParser extends Parser {
 				setState(9);
 				match(DOOR);
 				setState(10);
-				match(ID);
+				match(INT);
 				}
 				break;
 			case PICKUP:
@@ -477,6 +495,14 @@ public class PlayerCommandParser extends Parser {
 				match(ATTACK);
 				}
 				break;
+			case NEWLINE:
+				_localctx = new NewLineContext(_localctx);
+				enterOuterAlt(_localctx, 12);
+				{
+				setState(26);
+				match(NEWLINE);
+				}
+				break;
 			default:
 				throw new NoViableAltException(this);
 			}
@@ -493,30 +519,31 @@ public class PlayerCommandParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000f\u001d\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
+		"\u0004\u0001\u0010\u001e\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
 		"\u0001\u0000\u0004\u0000\u0006\b\u0000\u000b\u0000\f\u0000\u0007\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001\u001b"+
-		"\b\u0001\u0001\u0001\u0000\u0000\u0002\u0000\u0002\u0000\u0000%\u0000"+
-		"\u0005\u0001\u0000\u0000\u0000\u0002\u001a\u0001\u0000\u0000\u0000\u0004"+
-		"\u0006\u0003\u0002\u0001\u0000\u0005\u0004\u0001\u0000\u0000\u0000\u0006"+
-		"\u0007\u0001\u0000\u0000\u0000\u0007\u0005\u0001\u0000\u0000\u0000\u0007"+
-		"\b\u0001\u0000\u0000\u0000\b\u0001\u0001\u0000\u0000\u0000\t\n\u0005\u0001"+
-		"\u0000\u0000\n\u001b\u0005\f\u0000\u0000\u000b\f\u0005\u0002\u0000\u0000"+
-		"\f\u001b\u0005\f\u0000\u0000\r\u001b\u0005\u0003\u0000\u0000\u000e\u001b"+
-		"\u0005\u0004\u0000\u0000\u000f\u0010\u0005\u0005\u0000\u0000\u0010\u001b"+
-		"\u0005\f\u0000\u0000\u0011\u0012\u0005\u0006\u0000\u0000\u0012\u001b\u0005"+
-		"\f\u0000\u0000\u0013\u001b\u0005\u0007\u0000\u0000\u0014\u0015\u0005\b"+
-		"\u0000\u0000\u0015\u001b\u0005\f\u0000\u0000\u0016\u0017\u0005\t\u0000"+
-		"\u0000\u0017\u001b\u0005\f\u0000\u0000\u0018\u001b\u0005\n\u0000\u0000"+
-		"\u0019\u001b\u0005\u000b\u0000\u0000\u001a\t\u0001\u0000\u0000\u0000\u001a"+
-		"\u000b\u0001\u0000\u0000\u0000\u001a\r\u0001\u0000\u0000\u0000\u001a\u000e"+
-		"\u0001\u0000\u0000\u0000\u001a\u000f\u0001\u0000\u0000\u0000\u001a\u0011"+
-		"\u0001\u0000\u0000\u0000\u001a\u0013\u0001\u0000\u0000\u0000\u001a\u0014"+
-		"\u0001\u0000\u0000\u0000\u001a\u0016\u0001\u0000\u0000\u0000\u001a\u0018"+
-		"\u0001\u0000\u0000\u0000\u001a\u0019\u0001\u0000\u0000\u0000\u001b\u0003"+
-		"\u0001\u0000\u0000\u0000\u0002\u0007\u001a";
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003"+
+		"\u0001\u001c\b\u0001\u0001\u0001\u0000\u0000\u0002\u0000\u0002\u0000\u0000"+
+		"\'\u0000\u0005\u0001\u0000\u0000\u0000\u0002\u001b\u0001\u0000\u0000\u0000"+
+		"\u0004\u0006\u0003\u0002\u0001\u0000\u0005\u0004\u0001\u0000\u0000\u0000"+
+		"\u0006\u0007\u0001\u0000\u0000\u0000\u0007\u0005\u0001\u0000\u0000\u0000"+
+		"\u0007\b\u0001\u0000\u0000\u0000\b\u0001\u0001\u0000\u0000\u0000\t\n\u0005"+
+		"\u0001\u0000\u0000\n\u001c\u0005\r\u0000\u0000\u000b\f\u0005\u0002\u0000"+
+		"\u0000\f\u001c\u0005\f\u0000\u0000\r\u001c\u0005\u0003\u0000\u0000\u000e"+
+		"\u001c\u0005\u0004\u0000\u0000\u000f\u0010\u0005\u0005\u0000\u0000\u0010"+
+		"\u001c\u0005\f\u0000\u0000\u0011\u0012\u0005\u0006\u0000\u0000\u0012\u001c"+
+		"\u0005\f\u0000\u0000\u0013\u001c\u0005\u0007\u0000\u0000\u0014\u0015\u0005"+
+		"\b\u0000\u0000\u0015\u001c\u0005\f\u0000\u0000\u0016\u0017\u0005\t\u0000"+
+		"\u0000\u0017\u001c\u0005\f\u0000\u0000\u0018\u001c\u0005\n\u0000\u0000"+
+		"\u0019\u001c\u0005\u000b\u0000\u0000\u001a\u001c\u0005\u000e\u0000\u0000"+
+		"\u001b\t\u0001\u0000\u0000\u0000\u001b\u000b\u0001\u0000\u0000\u0000\u001b"+
+		"\r\u0001\u0000\u0000\u0000\u001b\u000e\u0001\u0000\u0000\u0000\u001b\u000f"+
+		"\u0001\u0000\u0000\u0000\u001b\u0011\u0001\u0000\u0000\u0000\u001b\u0013"+
+		"\u0001\u0000\u0000\u0000\u001b\u0014\u0001\u0000\u0000\u0000\u001b\u0016"+
+		"\u0001\u0000\u0000\u0000\u001b\u0018\u0001\u0000\u0000\u0000\u001b\u0019"+
+		"\u0001\u0000\u0000\u0000\u001b\u001a\u0001\u0000\u0000\u0000\u001c\u0003"+
+		"\u0001\u0000\u0000\u0000\u0002\u0007\u001b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
