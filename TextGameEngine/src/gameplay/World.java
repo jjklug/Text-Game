@@ -58,6 +58,7 @@ public class World {
         PlayerCommandLexer lexer = null;
         Scanner scanner = new Scanner(System.in);
 
+        //validates using token indices and lexer rules to make sure it is a proper command
         while(!valid) {
             commandIndex = -1;
             while (commandIndex >= 11 || commandIndex <= -1) {
@@ -119,9 +120,10 @@ public class World {
         PlayerCommandLexer lexer = null;
         Scanner scanner = new Scanner(System.in);
 
+        //validates using lexer indices to check if it is a valid rule
         while(!valid) {
             commandIndex = -1;
-            while (commandIndex >= 11 || commandIndex <= -1) {
+            while ((commandIndex != 8 && commandIndex != 10 && commandIndex != 11)) {
                 System.out.println("Enter Command(Explore Mode): ");
                 String input = scanner.nextLine();
                 lexer = new PlayerCommandLexer(CharStreams.fromString(input));
@@ -135,14 +137,22 @@ public class World {
             commandDirection = token.getText();
             commandDirectionIndex = token.getType();
 
-            if(commandIndex == 2 || commandIndex == 5 || commandIndex == 6 || commandIndex == 8 || commandIndex == 9) {
+            if(commandIndex == 8) {
                 valid = (commandDirectionIndex == 12);
-            } else if(commandIndex == 1){
-                valid = (commandDirectionIndex == 13);
             } else{
                 valid = true;
             }
         }
+
+        switch (command){
+            case "wield":
+
+            case "help":
+
+            case "attack":
+
+        }
     }
     //--------------------------------------------------------
+    //methods that correspond to proper
 }

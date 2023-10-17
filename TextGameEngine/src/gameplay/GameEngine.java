@@ -25,7 +25,7 @@ public class GameEngine
 
         while(!valid) {
             commandIndex = -1;
-            while (commandIndex >= 11 || commandIndex <= -1) {
+            while ((commandIndex != 8 && commandIndex != 10 && commandIndex != 11)) {
                 System.out.println("Enter Command(Explore Mode): ");
                 String input = scanner.nextLine();
                 lexer = new PlayerCommandLexer(CharStreams.fromString(input));
@@ -39,10 +39,8 @@ public class GameEngine
             commandDirection = token.getText();
             commandDirectionIndex = token.getType();
 
-            if(commandIndex == 2 || commandIndex == 5 || commandIndex == 6 || commandIndex == 8 || commandIndex == 9) {
+            if(commandIndex == 8) {
                 valid = (commandDirectionIndex == 12);
-            } else if(commandIndex == 1){
-                valid = (commandDirectionIndex == 13);
             } else{
                 valid = true;
             }
