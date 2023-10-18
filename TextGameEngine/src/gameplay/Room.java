@@ -15,17 +15,21 @@ public class Room extends Entity {
 
     private Inventory pickupsInRoom;
 
+    private Monster[] monstersInRoom;
+
     public Room(){
         super(null);
         pickupsInRoom = null;
         connectingRooms = null;
+        monstersInRoom = null;
     }
 
     public Room(String description,Inventory pickupsInRoom,
                 Room[] connectingRooms){
         super(description);
         this.pickupsInRoom = pickupsInRoom;
-
+        this.connectingRooms = connectingRooms;
+        monstersInRoom = null;
     }
 
 
@@ -51,5 +55,13 @@ public class Room extends Entity {
 
     public void setPickupsInRoom(Inventory pickupsInRoom) {
         this.pickupsInRoom = pickupsInRoom;
+    }
+
+    public Monster[] getMonstersInRoom() {
+        return this.monstersInRoom;
+    }
+
+    public void setMonstersInRoom(Monster[] monstersInRoom) {
+        this.monstersInRoom = monstersInRoom;
     }
 }

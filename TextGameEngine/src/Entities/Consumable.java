@@ -10,7 +10,7 @@ public abstract class Consumable extends Pickup {
     private boolean isConsumed;
     public Consumable(String desc){
         super(desc);
-        this.consumed = false;
+        this.isConsumed = false;
     }
 
 

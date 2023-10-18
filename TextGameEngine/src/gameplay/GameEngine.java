@@ -14,40 +14,9 @@ public class GameEngine
 {
 
     public static void main(String[] args) {
-        String command = "";
-        String commandDirection;
-        Token token;
-        int commandIndex;
-        int commandDirectionIndex = 0;
-        boolean valid = false;
-        PlayerCommandLexer lexer = null;
-        Scanner scanner = new Scanner(System.in);
-
-        while(!valid) {
-            commandIndex = -1;
-            while ((commandIndex != 8 && commandIndex != 10 && commandIndex != 11)) {
-                System.out.println("Enter Command(Explore Mode): ");
-                String input = scanner.nextLine();
-                lexer = new PlayerCommandLexer(CharStreams.fromString(input));
-                token = lexer.nextToken();
-                command = token.getText();
-                commandIndex = token.getType();
-                System.out.println(command + " " + commandIndex);
-            }
-
-            token = lexer.nextToken();
-            commandDirection = token.getText();
-            commandDirectionIndex = token.getType();
-
-            if(commandIndex == 8) {
-                valid = (commandDirectionIndex == 12);
-            } else{
-                valid = true;
-            }
-        }
 
         //read the World object instance from a text file or literal
-        //World world = ReadWorldDataFile.basicWorld();
+        World world = ReadWorldDataFile.basicWorld();
 
         //Player playerOne = new Player("Sir Kendric",100,50);
         //world.play(playerOne);

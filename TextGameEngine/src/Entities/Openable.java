@@ -16,4 +16,20 @@ public abstract class Openable extends Pickup {
     }
 
     public abstract void unlockWith(Opener pickup);
+
+    public boolean getLocked() {
+        return this.locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    public Pickup getContents() {
+        return this.contents;
+    }
+
+    public void setContents(Pickup contents) {
+        this.contents = contents;
+    }
 }
