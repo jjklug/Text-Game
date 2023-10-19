@@ -83,6 +83,12 @@ public class World {
                 valid = true;
             }
         }
+        PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
+        ParseTree tree = parser.prog();
+
+        CommandVisitor commVisit = new CommandVisitor();
+        commVisit.visit(tree);
+
 
             switch (command){
                 case "door":
@@ -154,5 +160,7 @@ public class World {
         }
     }
     //--------------------------------------------------------
-    //methods that correspond to proper
+    //methods that correspond to proper commands
+
+    p
 }

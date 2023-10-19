@@ -3,15 +3,16 @@ grammar GameMap;
 /** the start rule, begin parsing here **/
 prog: gamemap+ ;
 
-gamemap : connect NEWLINE                   # connectionsList
-        | PICKUP NEWLINE                    # pickupKeyword
-        | pickup NEWLINE                    # pickupsList
-        | MONSTER NEWLINE                   # monstersKeyword
-        | monster NEWLINE                   # monstersList
+gamemap : connect NEWLINE                   # connectList
+        | PICKUP NEWLINE pickup NEWLINE     # pickupsList
+        | pickup NEWLINE                    # pickups
+        | MONSTER NEWLINE monster NEWLINE   # monsterList
+        | monster NEWLINE                   # monsters
         | START NEWLINE                     # startKeyword
         | start NEWLINE                     # startList
         | FINISH NEWLINE                    # finishKeyword
         | finish NEWLINE                    # finishList
+        | NEWLINE                           # blank
         ;
 
 connect : connect CON connect       # connection
@@ -35,6 +36,7 @@ finish : CHAR                       #finishNode
        ;
 
 CON: '-' ;
+CONNECT: 'connect' ;
 MONSTER: 'monster' ;
 PICKUP: 'pickup' ;
 START: 'start';
