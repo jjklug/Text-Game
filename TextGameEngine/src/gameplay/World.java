@@ -68,7 +68,6 @@ public class World {
                 token = lexer.nextToken();
                 command = token.getText();
                 commandIndex = token.getType();
-                System.out.println(command + " " + commandIndex);
             }
 
             token = lexer.nextToken();
@@ -87,12 +86,12 @@ public class World {
         ParseTree tree = parser.prog();
 
         CommandVisitor commVisit = new CommandVisitor();
-        commVisit.visit(tree);
-
+        command = commVisit.visit(tree);
+        String commandArg = commVisit.commandArg;
 
             switch (command){
                 case "door":
-
+                    int commandArgDoor = Integer.parseInt(commandArg);
                 case "pickup":
 
                 case "exit":
@@ -162,5 +161,4 @@ public class World {
     //--------------------------------------------------------
     //methods that correspond to proper commands
 
-    p
 }

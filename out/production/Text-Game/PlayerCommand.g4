@@ -3,18 +3,17 @@ grammar PlayerCommand;
 /** the start rule, begin parsing here **/
 prog: command+ ;
 
-command : DOOR INT      # doorCommand
-        | PICKUP ID     # pickup
-        | EXIT          # exit
-        | DESCRIBE      # describe
-        | ADMIRE ID     # admireValuable
-        | EAT ID        # eatFood
-        | STATS         # lookAtStats
-        | WIELD ID      # wieldWeapon
-        | OPEN ID       # openChest
-        | HELP          # displayHelp
-        | ATTACK        # attackMonster
-        | NEWLINE       # newLine
+command : DOOR INT NEWLINE     # doorCommand
+        | PICKUP ID NEWLINE    # pickup
+        | EXIT NEWLINE         # exit
+        | DESCRIBE NEWLINE     # describe
+        | ADMIRE ID NEWLINE    # admireValuable
+        | EAT ID NEWLINE       # eatFood
+        | STATS NEWLINE        # lookAtStats
+        | WIELD ID NEWLINE     # wieldWeapon
+        | OPEN ID NEWLINE      # openChest
+        | HELP NEWLINE         # displayHelp
+        | ATTACK NEWLINE       # attackMonster
         ;
 
 DOOR : 'door';
