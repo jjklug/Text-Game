@@ -149,16 +149,4 @@ public interface PlayerCommandListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAttackMonster(PlayerCommandParser.AttackMonsterContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code newLine}
-	 * labeled alternative in {@link PlayerCommandParser#command}.
-	 * @param ctx the parse tree
-	 */
-	void enterNewLine(PlayerCommandParser.NewLineContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code newLine}
-	 * labeled alternative in {@link PlayerCommandParser#command}.
-	 * @param ctx the parse tree
-	 */
-	void exitNewLine(PlayerCommandParser.NewLineContext ctx);
 }

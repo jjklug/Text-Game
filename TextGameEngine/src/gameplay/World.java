@@ -17,6 +17,13 @@ public class World {
     Player player;
     PlayMode mode;
 
+    //Graph gameMap = new Graph(null, null);
+    Room[] map;
+    public World(Room[] map){
+        this.map = map;
+    }
+
+
 
     //--------------------------------------------------------
     public void onEnterRoom()
@@ -160,5 +167,6 @@ public class World {
     }
     //--------------------------------------------------------
     //methods that correspond to proper commands
+
 
 }

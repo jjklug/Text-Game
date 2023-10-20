@@ -139,7 +139,7 @@ public class PlayerCommandParser extends Parser {
 				setState(7); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 20478L) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 4094L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -168,6 +168,7 @@ public class PlayerCommandParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExitContext extends CommandContext {
 		public TerminalNode EXIT() { return getToken(PlayerCommandParser.EXIT, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public ExitContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -186,6 +187,7 @@ public class PlayerCommandParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class LookAtStatsContext extends CommandContext {
 		public TerminalNode STATS() { return getToken(PlayerCommandParser.STATS, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public LookAtStatsContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -205,6 +207,7 @@ public class PlayerCommandParser extends Parser {
 	public static class DoorCommandContext extends CommandContext {
 		public TerminalNode DOOR() { return getToken(PlayerCommandParser.DOOR, 0); }
 		public TerminalNode INT() { return getToken(PlayerCommandParser.INT, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public DoorCommandContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -221,27 +224,10 @@ public class PlayerCommandParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class NewLineContext extends CommandContext {
-		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
-		public NewLineContext(CommandContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).enterNewLine(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).exitNewLine(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PlayerCommandVisitor ) return ((PlayerCommandVisitor<? extends T>)visitor).visitNewLine(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
 	public static class AdmireValuableContext extends CommandContext {
 		public TerminalNode ADMIRE() { return getToken(PlayerCommandParser.ADMIRE, 0); }
 		public TerminalNode ID() { return getToken(PlayerCommandParser.ID, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public AdmireValuableContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -261,6 +247,7 @@ public class PlayerCommandParser extends Parser {
 	public static class WieldWeaponContext extends CommandContext {
 		public TerminalNode WIELD() { return getToken(PlayerCommandParser.WIELD, 0); }
 		public TerminalNode ID() { return getToken(PlayerCommandParser.ID, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public WieldWeaponContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -280,6 +267,7 @@ public class PlayerCommandParser extends Parser {
 	public static class PickupContext extends CommandContext {
 		public TerminalNode PICKUP() { return getToken(PlayerCommandParser.PICKUP, 0); }
 		public TerminalNode ID() { return getToken(PlayerCommandParser.ID, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public PickupContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -299,6 +287,7 @@ public class PlayerCommandParser extends Parser {
 	public static class EatFoodContext extends CommandContext {
 		public TerminalNode EAT() { return getToken(PlayerCommandParser.EAT, 0); }
 		public TerminalNode ID() { return getToken(PlayerCommandParser.ID, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public EatFoodContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -317,6 +306,7 @@ public class PlayerCommandParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class AttackMonsterContext extends CommandContext {
 		public TerminalNode ATTACK() { return getToken(PlayerCommandParser.ATTACK, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public AttackMonsterContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -335,6 +325,7 @@ public class PlayerCommandParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class DisplayHelpContext extends CommandContext {
 		public TerminalNode HELP() { return getToken(PlayerCommandParser.HELP, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public DisplayHelpContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -353,6 +344,7 @@ public class PlayerCommandParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class DescribeContext extends CommandContext {
 		public TerminalNode DESCRIBE() { return getToken(PlayerCommandParser.DESCRIBE, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public DescribeContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -372,6 +364,7 @@ public class PlayerCommandParser extends Parser {
 	public static class OpenChestContext extends CommandContext {
 		public TerminalNode OPEN() { return getToken(PlayerCommandParser.OPEN, 0); }
 		public TerminalNode ID() { return getToken(PlayerCommandParser.ID, 0); }
+		public TerminalNode NEWLINE() { return getToken(PlayerCommandParser.NEWLINE, 0); }
 		public OpenChestContext(CommandContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -392,7 +385,7 @@ public class PlayerCommandParser extends Parser {
 		CommandContext _localctx = new CommandContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_command);
 		try {
-			setState(27);
+			setState(37);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case DOOR:
@@ -403,103 +396,117 @@ public class PlayerCommandParser extends Parser {
 				match(DOOR);
 				setState(10);
 				match(INT);
+				setState(11);
+				match(NEWLINE);
 				}
 				break;
 			case PICKUP:
 				_localctx = new PickupContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(11);
-				match(PICKUP);
 				setState(12);
+				match(PICKUP);
+				setState(13);
 				match(ID);
+				setState(14);
+				match(NEWLINE);
 				}
 				break;
 			case EXIT:
 				_localctx = new ExitContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(13);
+				setState(15);
 				match(EXIT);
+				setState(16);
+				match(NEWLINE);
 				}
 				break;
 			case DESCRIBE:
 				_localctx = new DescribeContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(14);
+				setState(17);
 				match(DESCRIBE);
+				setState(18);
+				match(NEWLINE);
 				}
 				break;
 			case ADMIRE:
 				_localctx = new AdmireValuableContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(15);
+				setState(19);
 				match(ADMIRE);
-				setState(16);
+				setState(20);
 				match(ID);
+				setState(21);
+				match(NEWLINE);
 				}
 				break;
 			case EAT:
 				_localctx = new EatFoodContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(17);
+				setState(22);
 				match(EAT);
-				setState(18);
+				setState(23);
 				match(ID);
+				setState(24);
+				match(NEWLINE);
 				}
 				break;
 			case STATS:
 				_localctx = new LookAtStatsContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(19);
+				setState(25);
 				match(STATS);
+				setState(26);
+				match(NEWLINE);
 				}
 				break;
 			case WIELD:
 				_localctx = new WieldWeaponContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(20);
+				setState(27);
 				match(WIELD);
-				setState(21);
+				setState(28);
 				match(ID);
+				setState(29);
+				match(NEWLINE);
 				}
 				break;
 			case OPEN:
 				_localctx = new OpenChestContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(22);
+				setState(30);
 				match(OPEN);
-				setState(23);
+				setState(31);
 				match(ID);
+				setState(32);
+				match(NEWLINE);
 				}
 				break;
 			case HELP:
 				_localctx = new DisplayHelpContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(24);
+				setState(33);
 				match(HELP);
+				setState(34);
+				match(NEWLINE);
 				}
 				break;
 			case ATTACK:
 				_localctx = new AttackMonsterContext(_localctx);
 				enterOuterAlt(_localctx, 11);
 				{
-				setState(25);
+				setState(35);
 				match(ATTACK);
-				}
-				break;
-			case NEWLINE:
-				_localctx = new NewLineContext(_localctx);
-				enterOuterAlt(_localctx, 12);
-				{
-				setState(26);
+				setState(36);
 				match(NEWLINE);
 				}
 				break;
@@ -519,31 +526,35 @@ public class PlayerCommandParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0010\u001e\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
-		"\u0001\u0000\u0004\u0000\u0006\b\u0000\u000b\u0000\f\u0000\u0007\u0001"+
+		"\u0004\u0001\u0010(\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0001"+
+		"\u0000\u0004\u0000\u0006\b\u0000\u000b\u0000\f\u0000\u0007\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003"+
-		"\u0001\u001c\b\u0001\u0001\u0001\u0000\u0000\u0002\u0000\u0002\u0000\u0000"+
-		"\'\u0000\u0005\u0001\u0000\u0000\u0000\u0002\u001b\u0001\u0000\u0000\u0000"+
-		"\u0004\u0006\u0003\u0002\u0001\u0000\u0005\u0004\u0001\u0000\u0000\u0000"+
-		"\u0006\u0007\u0001\u0000\u0000\u0000\u0007\u0005\u0001\u0000\u0000\u0000"+
-		"\u0007\b\u0001\u0000\u0000\u0000\b\u0001\u0001\u0000\u0000\u0000\t\n\u0005"+
-		"\u0001\u0000\u0000\n\u001c\u0005\r\u0000\u0000\u000b\f\u0005\u0002\u0000"+
-		"\u0000\f\u001c\u0005\f\u0000\u0000\r\u001c\u0005\u0003\u0000\u0000\u000e"+
-		"\u001c\u0005\u0004\u0000\u0000\u000f\u0010\u0005\u0005\u0000\u0000\u0010"+
-		"\u001c\u0005\f\u0000\u0000\u0011\u0012\u0005\u0006\u0000\u0000\u0012\u001c"+
-		"\u0005\f\u0000\u0000\u0013\u001c\u0005\u0007\u0000\u0000\u0014\u0015\u0005"+
-		"\b\u0000\u0000\u0015\u001c\u0005\f\u0000\u0000\u0016\u0017\u0005\t\u0000"+
-		"\u0000\u0017\u001c\u0005\f\u0000\u0000\u0018\u001c\u0005\n\u0000\u0000"+
-		"\u0019\u001c\u0005\u000b\u0000\u0000\u001a\u001c\u0005\u000e\u0000\u0000"+
-		"\u001b\t\u0001\u0000\u0000\u0000\u001b\u000b\u0001\u0000\u0000\u0000\u001b"+
-		"\r\u0001\u0000\u0000\u0000\u001b\u000e\u0001\u0000\u0000\u0000\u001b\u000f"+
-		"\u0001\u0000\u0000\u0000\u001b\u0011\u0001\u0000\u0000\u0000\u001b\u0013"+
-		"\u0001\u0000\u0000\u0000\u001b\u0014\u0001\u0000\u0000\u0000\u001b\u0016"+
-		"\u0001\u0000\u0000\u0000\u001b\u0018\u0001\u0000\u0000\u0000\u001b\u0019"+
-		"\u0001\u0000\u0000\u0000\u001b\u001a\u0001\u0000\u0000\u0000\u001c\u0003"+
-		"\u0001\u0000\u0000\u0000\u0002\u0007\u001b";
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001&\b\u0001\u0001\u0001"+
+		"\u0000\u0000\u0002\u0000\u0002\u0000\u00000\u0000\u0005\u0001\u0000\u0000"+
+		"\u0000\u0002%\u0001\u0000\u0000\u0000\u0004\u0006\u0003\u0002\u0001\u0000"+
+		"\u0005\u0004\u0001\u0000\u0000\u0000\u0006\u0007\u0001\u0000\u0000\u0000"+
+		"\u0007\u0005\u0001\u0000\u0000\u0000\u0007\b\u0001\u0000\u0000\u0000\b"+
+		"\u0001\u0001\u0000\u0000\u0000\t\n\u0005\u0001\u0000\u0000\n\u000b\u0005"+
+		"\r\u0000\u0000\u000b&\u0005\u000e\u0000\u0000\f\r\u0005\u0002\u0000\u0000"+
+		"\r\u000e\u0005\f\u0000\u0000\u000e&\u0005\u000e\u0000\u0000\u000f\u0010"+
+		"\u0005\u0003\u0000\u0000\u0010&\u0005\u000e\u0000\u0000\u0011\u0012\u0005"+
+		"\u0004\u0000\u0000\u0012&\u0005\u000e\u0000\u0000\u0013\u0014\u0005\u0005"+
+		"\u0000\u0000\u0014\u0015\u0005\f\u0000\u0000\u0015&\u0005\u000e\u0000"+
+		"\u0000\u0016\u0017\u0005\u0006\u0000\u0000\u0017\u0018\u0005\f\u0000\u0000"+
+		"\u0018&\u0005\u000e\u0000\u0000\u0019\u001a\u0005\u0007\u0000\u0000\u001a"+
+		"&\u0005\u000e\u0000\u0000\u001b\u001c\u0005\b\u0000\u0000\u001c\u001d"+
+		"\u0005\f\u0000\u0000\u001d&\u0005\u000e\u0000\u0000\u001e\u001f\u0005"+
+		"\t\u0000\u0000\u001f \u0005\f\u0000\u0000 &\u0005\u000e\u0000\u0000!\""+
+		"\u0005\n\u0000\u0000\"&\u0005\u000e\u0000\u0000#$\u0005\u000b\u0000\u0000"+
+		"$&\u0005\u000e\u0000\u0000%\t\u0001\u0000\u0000\u0000%\f\u0001\u0000\u0000"+
+		"\u0000%\u000f\u0001\u0000\u0000\u0000%\u0011\u0001\u0000\u0000\u0000%"+
+		"\u0013\u0001\u0000\u0000\u0000%\u0016\u0001\u0000\u0000\u0000%\u0019\u0001"+
+		"\u0000\u0000\u0000%\u001b\u0001\u0000\u0000\u0000%\u001e\u0001\u0000\u0000"+
+		"\u0000%!\u0001\u0000\u0000\u0000%#\u0001\u0000\u0000\u0000&\u0003\u0001"+
+		"\u0000\u0000\u0000\u0002\u0007%";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

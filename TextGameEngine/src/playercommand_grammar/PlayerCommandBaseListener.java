@@ -156,18 +156,6 @@ public class PlayerCommandBaseListener implements PlayerCommandListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAttackMonster(PlayerCommandParser.AttackMonsterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNewLine(PlayerCommandParser.NewLineContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNewLine(PlayerCommandParser.NewLineContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

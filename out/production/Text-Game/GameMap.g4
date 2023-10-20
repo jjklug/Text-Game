@@ -3,48 +3,58 @@ grammar GameMap;
 /** the start rule, begin parsing here **/
 prog: gamemap+ ;
 
-gamemap : connect NEWLINE                   # connectList
-        | PICKUP NEWLINE pickup NEWLINE     # pickupsList
-        | pickup NEWLINE                    # pickups
-        | MONSTER NEWLINE monster NEWLINE   # monsterList
-        | monster NEWLINE                   # monsters
-        | START NEWLINE                     # startKeyword
-        | start NEWLINE                     # startList
-        | FINISH NEWLINE                    # finishKeyword
-        | finish NEWLINE                    # finishList
-        | NEWLINE                           # blank
+gamemap : state_list NEWLINE    # gameMap
         ;
 
-connect : connect CON connect       # connection
-        | CHAR                      # connectedNode
-        ;
+state_list : ( stat ';'?)*      # states
+           ;
 
-pickup : pickup CON pickup          # inv
-       | CHAR                       # invNode
-       | ID                         # itemID
+stat: edge_stmt                 # edges
+    | attr_stmt                 # attributes
+    ;
+
+edge_stmt: (ID ) edgeRHS ?      # leftEdge
+         ;
+
+edgeRHS: (edgeop ( ID ))       # rightEdge
        ;
 
-monster : monster CON monster       # monsterInv
-        | CHAR                      # monsterInvNode
-        | ID                        # monsterID
-        ;
-
-start : CHAR                        #startNode
+edgeop: CON
       ;
 
-finish : CHAR                       #finishNode
-       ;
+attr_stmt: attr_list
+         ;
 
+attr_list
+   : ( ID ( '=' ID )? ','? )+   # nodePickups
+   ;
+
+//lexer rules
 CON: '-' ;
-CONNECT: 'connect' ;
-MONSTER: 'monster' ;
-PICKUP: 'pickup' ;
-START: 'start';
-FINISH: 'finish';
 
-CHAR: 'a'..'z' ;
-ID : [a-zA-Z]+ ;
-INT : [0-9]+ ;
+//inspired from DOT grammar on the ANTLR lab
+NUMBER
+   : '-'? ( '.' DIGIT+ | DIGIT+ ( '.' DIGIT* )? )
+   ;
+
+fragment DIGIT
+   : [0-9]
+   ;
+
+/** "any double-quoted string ("...") possibly containing escaped quotes" */ STRING
+   : '"' ( '\\"' | . )*? '"'
+   ;
+
+/** "Any string of alphabetic ([a-zA-Z\200-\377]) characters, underscores
+ *  ('_') or digits ([0-9]), not beginning with a digit"
+ */ ID
+   : LETTER ( LETTER | DIGIT )*
+   ;
+
+fragment LETTER
+   : [a-zA-Z\u0080-\u00FF_]
+   ;
+//generic ones
 NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
 WS : [ \t]+ -> skip ;
 ANY: . ;

@@ -1,0 +1,10 @@
+T__0=1
+CON=2
+CHAR=3
+ID=4
+INT=5
+NEWLINE=6
+WS=7
+ANY=8
+';'=1
+'-'=2

@@ -25,11 +25,11 @@ public class Room extends Entity {
     }
 
     public Room(String description,Inventory pickupsInRoom,
-                Room[] connectingRooms){
+                Room[] connectingRooms, Monster[] monstersInRoom){
         super(description);
         this.pickupsInRoom = pickupsInRoom;
         this.connectingRooms = connectingRooms;
-        monstersInRoom = null;
+        this.monstersInRoom = monstersInRoom;
     }
 
 
