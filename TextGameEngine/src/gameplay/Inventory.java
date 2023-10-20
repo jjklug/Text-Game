@@ -4,6 +4,7 @@ package gameplay;
 import java.util.ArrayList;
 
 import Entities.Pickup;
+import Entities.Wieldables.FistsOfFury;
 
 
 public class Inventory
@@ -14,6 +15,7 @@ public class Inventory
 	public Inventory()
 	{
 		this.items = new ArrayList<Pickup>();
+		items.add(new FistsOfFury());
 	}
 	//------------------------------------
 	public String toString()

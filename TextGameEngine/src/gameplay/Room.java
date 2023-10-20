@@ -2,6 +2,8 @@ package gameplay;
 
 import Entities.*;
 
+import java.util.ArrayList;
+
 /**
  * gameplay.Room Class - Jack Klug
  * This class is used to represent the rooms that will make up the layout of the game
@@ -11,11 +13,11 @@ import Entities.*;
 public class Room extends Entity {
     private boolean isFinal;
 
-    private Room[] connectingRooms;
+    private ArrayList<Room> connectingRooms;
 
     private Inventory pickupsInRoom;
 
-    private Monster[] monstersInRoom;
+    private ArrayList<Monster> monstersInRoom;
 
     public Room(){
         super(null);
@@ -25,7 +27,7 @@ public class Room extends Entity {
     }
 
     public Room(String description,Inventory pickupsInRoom,
-                Room[] connectingRooms, Monster[] monstersInRoom){
+                ArrayList<Room> connectingRooms, ArrayList<Monster> monstersInRoom){
         super(description);
         this.pickupsInRoom = pickupsInRoom;
         this.connectingRooms = connectingRooms;
@@ -41,11 +43,11 @@ public class Room extends Entity {
         this.isFinal = isFinal;
     }
 
-    public Room[] getConnectingRooms() {
+    public ArrayList<Room> getConnectingRooms() {
         return connectingRooms;
     }
 
-    public void setConnectingRooms(Room[] connectingRooms) {
+    public void setConnectingRooms(ArrayList<Room> connectingRooms) {
         this.connectingRooms = connectingRooms;
     }
 
@@ -57,11 +59,12 @@ public class Room extends Entity {
         this.pickupsInRoom = pickupsInRoom;
     }
 
-    public Monster[] getMonstersInRoom() {
+    public ArrayList<Monster> getMonstersInRoom() {
         return this.monstersInRoom;
     }
 
-    public void setMonstersInRoom(Monster[] monstersInRoom) {
+    public void setMonstersInRoom(ArrayList<Monster> monstersInRoom) {
         this.monstersInRoom = monstersInRoom;
     }
+
 }

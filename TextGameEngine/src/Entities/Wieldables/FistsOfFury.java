@@ -4,7 +4,7 @@ import Entities.*;
 
 public class FistsOfFury extends Wieldable {
 
-    public FistsOfFury(String desc, int low, int high) {
-        super(desc, low, high);
+    public FistsOfFury() {
+        super("Fists O Fury", 1, 3);
     }
 }

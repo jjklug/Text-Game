@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
@@ -18,8 +19,8 @@ public class World {
     PlayMode mode;
 
     //Graph gameMap = new Graph(null, null);
-    Room[] map;
-    public World(Room[] map){
+    ArrayList<Room> map;
+    public World(ArrayList<Room> map){
         this.map = map;
     }
 
