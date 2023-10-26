@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.*;
-import Entities.Wieldables.*;
 //import Entities.Valuables.*;
 //import Entities.Openables.*;
 //import Entities.Food.*;
 import Entities.Monsters.*;
 import gamemap_grammar.*;
 import org.antlr.v4.runtime.CharStreams;
-import org.stringtemplate.v4.debug.EvalExprEvent;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -39,12 +37,14 @@ public class ReadWorldDataFile {
                 lexer = new GameMapLexer(CharStreams.fromString(line));
                 GameMapParser parser = new GameMapParser(new CommonTokenStream(lexer));
                 ParseTree tree = parser.prog();
-                GameMapVisitor gmv = new GameMapVisitor();
+                MapVisitor mv = new MapVisitor();
 
-                String node = gmv.visit(tree);
-                String node2 = gmv.rightNode;
+                String node = mv.visit(tree);
+                node = mv.leftNode;
+                String node2 = mv.rightNode;
                 System.out.println(node);
-                String[] roomAttribs = gmv.roomAttribs;
+                System.out.println(node2);
+                String[] roomAttribs = mv.roomAttribs;
                 System.out.println(roomAttribs);
 
                 if(node2 != null) {
@@ -70,6 +70,7 @@ public class ReadWorldDataFile {
 
     public static ArrayList<Room> addConnections(String node, String node2, ArrayList<Room> rooms) {
         //checker for duplicates before we create new rooms to the map
+
         boolean nodeDupe = false;
         Room leftRoom;
         Room rightRoom;
@@ -79,6 +80,7 @@ public class ReadWorldDataFile {
 
         //dupe checking and setting up for adding to rooms and attributes
         for (int i = 0; i < rooms.size(); i++) {
+
             if (rooms.get(i).getDesc().equals(node)) {
                 nodeDupe = true;
                 nodeNum = i;
@@ -88,13 +90,14 @@ public class ReadWorldDataFile {
                 node2Num = i;
             }
         }
-        if (nodeDupe = false) {
+        if(nodeDupe == false) {
             leftRoom = new Room(node, new Inventory(), new ArrayList<Room>(), new ArrayList<Monster>());
-        } else {
+        }else{
             leftRoom = rooms.get(nodeNum);
             rooms.remove(nodeNum);
         }
-        if (node2Dupe = false) {
+
+        if (node2Dupe == false) {
             rightRoom = new Room(node2, new Inventory(), new ArrayList<Room>(), new ArrayList<Monster>());
         } else {
             rightRoom = rooms.get(node2Num);
