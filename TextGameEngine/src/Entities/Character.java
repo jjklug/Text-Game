@@ -11,8 +11,8 @@ package Entities;
 public abstract class Character extends Entity {
     private int hp;
 
-    public Character(int hp){
-        super("Character");
+    public Character(String desc, int hp){
+        super(desc);
         this.hp = Math.max(hp,0);
     }
 

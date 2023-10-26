@@ -26,7 +26,7 @@ ANY
 
 rule names:
 prog
-gamemap
+map
 state_list
 stat
 edge_stmt

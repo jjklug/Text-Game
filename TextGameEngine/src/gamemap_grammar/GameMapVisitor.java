@@ -18,7 +18,7 @@ public interface GameMapVisitor<T> extends ParseTreeVisitor<T> {
 	T visitProg(GameMapParser.ProgContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code gameMap}
-	 * labeled alternative in {@link GameMapParser#gamemap}.
+	 * labeled alternative in {@link GameMapParser#map}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */

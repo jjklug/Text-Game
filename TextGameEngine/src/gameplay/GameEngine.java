@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 import playercommand_grammar.PlayerCommandLexer;
 import playercommand_grammar.PlayerCommandParser;
+import gamemap_grammar.*;
 
 import java.sql.SQLOutput;
 import java.util.Scanner;
@@ -16,9 +17,9 @@ public class GameEngine
     public static void main(String[] args) {
 //        String command = "";
 //        String input = "";
-//        String commandDirection;
+//        String commandDirection = "";
 //        Token token;
-//        int commandIndex;
+//        int commandIndex = 0;
 //        int commandDirectionIndex = 0;
 //        boolean valid = false;
 //        PlayerCommandLexer lexer = null;
@@ -57,7 +58,6 @@ public class GameEngine
 //        command = cV.visit(tree);
 //        String commandArg = cV.commandArg;
 //        System.out.println(commandArg);
-
 
 
         //read the World object instance from a text file or literal

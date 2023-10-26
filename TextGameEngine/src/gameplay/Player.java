@@ -16,8 +16,7 @@ public class Player extends Character
 
     public Player(String name,int hp, int confidence)
     {
-        super(hp);
-        super.setDesc("Player");
+        super("Player", hp);
         this.name = name;
         this.confidence = confidence;
     }

@@ -20,11 +20,11 @@ public class GameMapParser extends Parser {
 		T__0=1, T__1=2, T__2=3, CON=4, NUMBER=5, STRING=6, ID=7, NEWLINE=8, WS=9, 
 		ANY=10;
 	public static final int
-		RULE_prog = 0, RULE_gamemap = 1, RULE_state_list = 2, RULE_stat = 3, RULE_edge_stmt = 4, 
+		RULE_prog = 0, RULE_map = 1, RULE_state_list = 2, RULE_stat = 3, RULE_edge_stmt = 4, 
 		RULE_edgeRHS = 5, RULE_edgeop = 6, RULE_attr_stmt = 7, RULE_attr_list = 8;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"prog", "gamemap", "state_list", "stat", "edge_stmt", "edgeRHS", "edgeop", 
+			"prog", "map", "state_list", "stat", "edge_stmt", "edgeRHS", "edgeop", 
 			"attr_stmt", "attr_list"
 		};
 	}
@@ -95,11 +95,11 @@ public class GameMapParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgContext extends ParserRuleContext {
-		public List<GamemapContext> gamemap() {
-			return getRuleContexts(GamemapContext.class);
+		public List<MapContext> map() {
+			return getRuleContexts(MapContext.class);
 		}
-		public GamemapContext gamemap(int i) {
-			return getRuleContext(GamemapContext.class,i);
+		public MapContext map(int i) {
+			return getRuleContext(MapContext.class,i);
 		}
 		public ProgContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -134,7 +134,7 @@ public class GameMapParser extends Parser {
 				{
 				{
 				setState(18);
-				gamemap();
+				map();
 				}
 				}
 				setState(21); 
@@ -155,24 +155,24 @@ public class GameMapParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class GamemapContext extends ParserRuleContext {
-		public GamemapContext(ParserRuleContext parent, int invokingState) {
+	public static class MapContext extends ParserRuleContext {
+		public MapContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_gamemap; }
+		@Override public int getRuleIndex() { return RULE_map; }
 	 
-		public GamemapContext() { }
-		public void copyFrom(GamemapContext ctx) {
+		public MapContext() { }
+		public void copyFrom(MapContext ctx) {
 			super.copyFrom(ctx);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class GameMapContext extends GamemapContext {
+	public static class GameMapContext extends MapContext {
 		public State_listContext state_list() {
 			return getRuleContext(State_listContext.class,0);
 		}
 		public TerminalNode NEWLINE() { return getToken(GameMapParser.NEWLINE, 0); }
-		public GameMapContext(GamemapContext ctx) { copyFrom(ctx); }
+		public GameMapContext(MapContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).enterGameMap(this);
@@ -188,9 +188,9 @@ public class GameMapParser extends Parser {
 		}
 	}
 
-	public final GamemapContext gamemap() throws RecognitionException {
-		GamemapContext _localctx = new GamemapContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_gamemap);
+	public final MapContext map() throws RecognitionException {
+		MapContext _localctx = new MapContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_map);
 		try {
 			_localctx = new GameMapContext(_localctx);
 			enterOuterAlt(_localctx, 1);

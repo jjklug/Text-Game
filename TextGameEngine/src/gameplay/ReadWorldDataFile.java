@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 import Entities.*;
 import Entities.Wieldables.*;
-import Entities.Valuables.*;
-import Entities.Openables.*;
-import Entities.Food.*;
+//import Entities.Valuables.*;
+//import Entities.Openables.*;
+//import Entities.Food.*;
 import Entities.Monsters.*;
-import gamemap_grammar.GameMapLexer;
-import gamemap_grammar.GameMapParser;
+import gamemap_grammar.*;
 import org.antlr.v4.runtime.CharStreams;
+import org.stringtemplate.v4.debug.EvalExprEvent;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -39,7 +39,6 @@ public class ReadWorldDataFile {
                 lexer = new GameMapLexer(CharStreams.fromString(line));
                 GameMapParser parser = new GameMapParser(new CommonTokenStream(lexer));
                 ParseTree tree = parser.prog();
-
                 GameMapVisitor gmv = new GameMapVisitor();
 
                 String node = gmv.visit(tree);
@@ -74,8 +73,8 @@ public class ReadWorldDataFile {
         boolean nodeDupe = false;
         Room leftRoom;
         Room rightRoom;
-        int nodeNum;
-        int node2Num;
+        int nodeNum = 0;
+        int node2Num = 0;
         boolean node2Dupe = false;
 
         //dupe checking and setting up for adding to rooms and attributes
@@ -121,7 +120,7 @@ public class ReadWorldDataFile {
     }
 
     public static ArrayList<Room> addAttributes(String node, String[] roomAttribs, ArrayList<Room> rooms) {
-        int nodeNum;
+        int nodeNum = 0;
         for(int i = 0; i < rooms.size(); i++){
             if(rooms.get(i).getDesc().equals(node)){
                 nodeNum = i;
@@ -135,12 +134,11 @@ public class ReadWorldDataFile {
         for (int i = 0; i < roomAttribs.length; i++) {
             String attribute = roomAttribs[i];
             switch (attribute) {
-                case "sword":
+                case "zombie":
                     ArrayList<Monster> newMonsters = room.getMonstersInRoom();
-                    newMonsters.add(new Sword);
+                    newMonsters.add(new Zombie());
                     room.setMonstersInRoom(newMonsters);
                 case "axe":
-                    //
             }
         }
 

@@ -1,10 +1,10 @@
 grammar GameMap;
 
 /** the start rule, begin parsing here **/
-prog: gamemap+ ;
+prog: map+ ;
 
-gamemap : state_list NEWLINE    # gameMap
-        ;
+map : state_list NEWLINE    # gameMap
+    ;
 
 state_list : ( stat ';'?)*      # states
            ;

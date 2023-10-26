@@ -11,9 +11,8 @@ public class Monster extends Character {
     private int prob;
     private int damage;
 
-    public Monster(int hp, int prob, int damage){
-        super(hp);
-        super.setDesc("Monster");
+    public Monster(String desc, int hp, int prob, int damage){
+        super(desc, hp);
         this.prob = prob;
         this.damage = damage;
     }
