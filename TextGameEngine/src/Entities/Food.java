@@ -7,7 +7,7 @@ import Entities.Consumable;
  * class that represents food items
  */
 
-abstract class Food extends Consumable {
+abstract public class Food extends Consumable {
     private int hp;
 
     public Food(String desc, int hp){

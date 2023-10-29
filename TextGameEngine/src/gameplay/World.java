@@ -1,4 +1,7 @@
-
+/**
+ * world class which represents the virtual world we will be exploring
+ * processes input from player and controls everything that goes on in the world
+ */
 
 package gameplay;
 
@@ -54,6 +57,9 @@ public class World {
         }
     }
     //--------------------------------------------------------
+    /**
+     * processes user input during explore mode
+     */
     public void processExploreUserInput(){
 
         //initial variables
@@ -90,37 +96,48 @@ public class World {
                 valid = true;
             }
         }
+
+        //creates parser and parses
         PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
         ParseTree tree = parser.prog();
-
+        //uses visitor
         CommandVisitor commVisit = new CommandVisitor();
         command = commVisit.visit(tree);
+        //gets command
         String commandArg = commVisit.commandArg;
 
-            switch (command){
-                case "door":
-                    int commandArgDoor = Integer.parseInt(commandArg);
-                case "pickup":
+        //goes through all possible commands and decides which it is
 
-                case "exit":
+        //important
+        //make individual methods for each of these cases or commands
+        //
+        switch (command){
+            case "door":
+                int commandArgDoor = Integer.parseInt(commandArg);
+            case "pickup":
 
-                case "describe":
+            case "exit":
 
-                case "admire":
+            case "describe":
 
-                case "eat":
+            case "admire":
 
-                case "stats":
+            case "eat":
 
-                case "wield":
+            case "stats":
 
-                case "open":
+            case "wield":
 
-                case "help":
+            case "open":
 
-            }
+            case "help":
+
+        }
     }
 
+    /**
+     * processes user input for battle mode
+     */
     private void processBattleUserInput(){
 
         //initial variables
@@ -157,6 +174,20 @@ public class World {
             }
         }
 
+        //creates parser and parses
+        PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
+        ParseTree tree = parser.prog();
+        //uses visitor
+        CommandVisitor commVisit = new CommandVisitor();
+        command = commVisit.visit(tree);
+        //gets command
+        String commandArg = commVisit.commandArg;
+
+        //goes through all possible commands and decides which it is
+
+        //important
+        //make individual methods for each of these cases or commands
+        //
         switch (command){
             case "wield":
 

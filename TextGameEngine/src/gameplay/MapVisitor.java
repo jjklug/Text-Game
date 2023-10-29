@@ -1,9 +1,9 @@
 package gameplay;
-
+import java.util.ArrayList;
 import gamemap_grammar.*;
 
 public class MapVisitor extends GameMapBaseVisitor<String> {
-    String[] roomAttribs;
+    ArrayList<String> roomAttribs = new ArrayList<>();
     String rightNode;
     String leftNode;
 
@@ -22,8 +22,10 @@ public class MapVisitor extends GameMapBaseVisitor<String> {
     @Override
     public String visitNodePickups(GameMapParser.NodePickupsContext ctx){
         for (int i = 0; i < ctx.ID().size()-1; i++){
-            roomAttribs[i] = ctx.ID(i+1).getText();
+            roomAttribs.add(ctx.ID(i+1).getText());
         }
+
+        leftNode = ctx.ID(0).getText();
         return ctx.ID(0).getText();
     }
 }

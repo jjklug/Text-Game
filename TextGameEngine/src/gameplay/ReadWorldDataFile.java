@@ -39,17 +39,19 @@ public class ReadWorldDataFile {
                 ParseTree tree = parser.prog();
                 MapVisitor mv = new MapVisitor();
 
-                String node = mv.visit(tree);
-                node = mv.leftNode;
+                //runs visitor and collects all the parsed data from that line in the file
+                mv.visit(tree);
+                String node = mv.leftNode;
                 String node2 = mv.rightNode;
                 System.out.println(node);
                 System.out.println(node2);
-                String[] roomAttribs = mv.roomAttribs;
+                ArrayList<String> roomAttribs = mv.roomAttribs;
                 System.out.println(roomAttribs);
 
+                //if the line is a connection statement then add the missing connections
                 if(node2 != null) {
                     rooms = addConnections(node, node2, rooms);
-                }else {
+                }else {     //if the line is an attribute statement then add the attributes to that room
                     rooms = addAttributes(node, roomAttribs, rooms);
                 }
                 node2 = null;
@@ -62,12 +64,20 @@ public class ReadWorldDataFile {
             e.printStackTrace();
         }
 
-
+        System.out.println(rooms);
+        //create the world with all of the rooms
         World world = new World(rooms);
 
-        return null;
+        return world;
     }
 
+    /**
+     * add all connections for room
+     * @param node  left side node for input statements
+     * @param node2 right side node that the connection is being made to
+     * @param rooms list of previous rooms for comparison
+     * @return new list of rooms with the added connection from that line
+     */
     public static ArrayList<Room> addConnections(String node, String node2, ArrayList<Room> rooms) {
         //checker for duplicates before we create new rooms to the map
 
@@ -90,13 +100,14 @@ public class ReadWorldDataFile {
                 node2Num = i;
             }
         }
+        //if no dupes create a whole new room for it
         if(nodeDupe == false) {
             leftRoom = new Room(node, new Inventory(), new ArrayList<Room>(), new ArrayList<Monster>());
-        }else{
+        }else{  //othrwise remove the old room because it will be altered with new connections
             leftRoom = rooms.get(nodeNum);
             rooms.remove(nodeNum);
         }
-
+        //same thing with right side node
         if (node2Dupe == false) {
             rightRoom = new Room(node2, new Inventory(), new ArrayList<Room>(), new ArrayList<Monster>());
         } else {
@@ -116,26 +127,39 @@ public class ReadWorldDataFile {
             rightRoom.setConnectingRooms(newConnectingList);
         }
 
+        //adds the new altered nodes to the rooms list
         rooms.add(rightRoom);
         rooms.add(leftRoom);
 
         return rooms;
     }
 
-    public static ArrayList<Room> addAttributes(String node, String[] roomAttribs, ArrayList<Room> rooms) {
+    /**
+     * method that adds attributes to the room's inventories including monsters, pickups and start/finish
+     * @param node  left node that the lists is being defined for
+     * @param roomAttribs list of attributes for the room
+     * @param rooms previous list of rooms that will be changed
+     * @return new changed rooms list
+     */
+    public static ArrayList<Room> addAttributes(String node, ArrayList<String> roomAttribs, ArrayList<Room> rooms) {
         int nodeNum = 0;
+        //get current room in rooms list and remove it
         for(int i = 0; i < rooms.size(); i++){
             if(rooms.get(i).getDesc().equals(node)){
                 nodeNum = i;
             }
         }
-
         Room room = rooms.get(nodeNum);
         rooms.remove(nodeNum);
 
         //add pickups to room inventories
-        for (int i = 0; i < roomAttribs.length; i++) {
-            String attribute = roomAttribs[i];
+
+        //
+        //important
+        //must make cases for each possible item
+        //also need to make classes for each pickup type
+        for (int i = 0; i < roomAttribs.size(); i++) {
+            String attribute = roomAttribs.get(i);
             switch (attribute) {
                 case "zombie":
                     ArrayList<Monster> newMonsters = room.getMonstersInRoom();
