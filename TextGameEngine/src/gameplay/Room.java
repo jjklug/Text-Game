@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Room extends Entity {
     private boolean isFinal;
+    private boolean isFirst;
 
     private ArrayList<Room> connectingRooms;
 
@@ -41,6 +42,14 @@ public class Room extends Entity {
 
     public void setIsFinal(boolean isFinal) {
         this.isFinal = isFinal;
+    }
+
+    public boolean getIsFirst() {
+        return isFirst;
+    }
+
+    public void setIsFirst(boolean isFirst) {
+        this.isFirst = isFirst;
     }
 
     public ArrayList<Room> getConnectingRooms() {

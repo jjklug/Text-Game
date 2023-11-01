@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.*;
-//import Entities.Valuables.*;
-//import Entities.Openables.*;
-//import Entities.Food.*;
+import Entities.Valuables.*;
+import Entities.Openers.*;
+import Entities.Foods.*;
 import Entities.Monsters.*;
+import Entities.Wieldables.*;
 import gamemap_grammar.*;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -160,15 +161,52 @@ public class ReadWorldDataFile {
         //also need to make classes for each pickup type
         for (int i = 0; i < roomAttribs.size(); i++) {
             String attribute = roomAttribs.get(i);
+            ArrayList<Monster> newMonsters = new ArrayList<>();
+            Inventory newPickups = new Inventory();
             switch (attribute) {
                 case "zombie":
-                    ArrayList<Monster> newMonsters = room.getMonstersInRoom();
                     newMonsters.add(new Zombie());
-                    room.setMonstersInRoom(newMonsters);
+                case "dragon":
+                    newMonsters.add(new Dragon());
+                case "ogre":
+                    newMonsters.add(new Ogre());
                 case "axe":
+                    newPickups.add(new Axe());
+                case "sword":
+                    newPickups.add(new Sword());
+                case "moneybag":
+                    newPickups.add(new MoneyBag());
+                case "ring":
+                    newPickups.add(new Ring());
+                case "chalice":
+                    newPickups.add(new Chalice());
+                case "coin":
+                    newPickups.add(new Coin());
+                case "goldbars":
+                    newPickups.add(new GoldBars());
+                case "jewel":
+                    newPickups.add(new Jewel());
+                case "mobile":
+                    newPickups.add(new Mobile());
+                case "mead":
+                    newPickups.add(new Mead());
+                case "roastboar":
+                    newPickups.add(new RoastBoar());
+                case "bread":
+                    newPickups.add(new Bread());
+                case "key":
+                    newPickups.add(new Key());
+                case "lockpick":
+                    newPickups.add(new LockPick());
+                case "start":
+                    room.setIsFirst(true);
+                case "finish":
+                    room.setIsFinal(true);
             }
+            room.setPickupsInRoom(newPickups);
+            room.setMonstersInRoom(newMonsters);
         }
-
+        rooms.add(room);
         return rooms;
     }
 }

@@ -23,6 +23,8 @@ public class World {
 
     //Graph gameMap = new Graph(null, null);
     ArrayList<Room> map;
+
+    Room currRoom;
     public World(ArrayList<Room> map){
         this.map = map;
     }
@@ -53,7 +55,6 @@ public class World {
                     //processBattleUserInput();
                     break;
             }
-
         }
     }
     //--------------------------------------------------------
@@ -114,10 +115,11 @@ public class World {
         switch (command){
             case "door":
                 int commandArgDoor = Integer.parseInt(commandArg);
+                //door(commandArgDoor);
             case "pickup":
-
+                //pickup(commandArg);
             case "exit":
-
+                //exit();
             case "describe":
 
             case "admire":
@@ -134,6 +136,18 @@ public class World {
 
         }
     }
+
+//    private void door(int doorNum){
+//
+//    }
+//
+//    private void exit(){
+//
+//    }
+//
+//    private void pickup(String item){
+//        if()
+//    }
 
     /**
      * processes user input for battle mode
@@ -200,5 +214,12 @@ public class World {
     //--------------------------------------------------------
     //methods that correspond to proper commands
 
+
+
+
+    //other methods
+//    private String searchAttributes(Room room, String attr){
+//        for(int i = 0; i <= room.getpic)
+//    }
 
 }

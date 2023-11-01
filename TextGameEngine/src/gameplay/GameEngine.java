@@ -63,7 +63,7 @@ public class GameEngine
         //read the World object instance from a text file or literal
         World world = ReadWorldDataFile.basicWorld("map.txt");
 
-        //Player playerOne = new Player("Sir Kendric",100,50);
+        Player playerOne = new Player("Sir Kendric",100,50);
         //world.play(playerOne);
     }
 

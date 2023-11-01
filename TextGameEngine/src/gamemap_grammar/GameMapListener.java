@@ -30,6 +30,18 @@ public interface GameMapListener extends ParseTreeListener {
 	 */
 	void exitGameMap(GameMapParser.GameMapContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code blank}
+	 * labeled alternative in {@link GameMapParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlank(GameMapParser.BlankContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code blank}
+	 * labeled alternative in {@link GameMapParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlank(GameMapParser.BlankContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code states}
 	 * labeled alternative in {@link GameMapParser#state_list}.
 	 * @param ctx the parse tree
