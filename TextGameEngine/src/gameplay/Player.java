@@ -37,6 +37,12 @@ public class Player extends Character
         this.confidence = c;
     }
 
+    public Inventory getInventory(){ return this.inventory};
+
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory;
+    }
+
     /**
      * Uses the confidence and the weapons power level to determine the amt of damage that will be dealt
      * @return damage that will be dealt to enemy
