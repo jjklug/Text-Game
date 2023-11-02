@@ -4,6 +4,6 @@ import Entities.Wieldable;
 
 public class Axe extends Wieldable {
     public Axe(){
-        super("sword", 10, 50);
+        super("axe", 10, 50);
     }
 }

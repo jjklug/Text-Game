@@ -27,6 +27,14 @@ public class World {
     Room currRoom;
     public World(ArrayList<Room> map){
         this.map = map;
+        //finds first room and sets curr room to that room
+        for(int i = 0; i < map.size(); i++){
+            System.out.println(map.get(i).getPickupsInRoom());
+            System.out.println(map.get(i).getMonstersInRoom());
+            if (map.get(i).getIsFirst() == true){
+                this.currRoom = map.get(i);
+            }
+        }
     }
 
 
@@ -146,7 +154,7 @@ public class World {
 //    }
 //
 //    private void pickup(String item){
-//        if()
+//
 //    }
 
     /**

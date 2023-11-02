@@ -65,7 +65,7 @@ public class ReadWorldDataFile {
             e.printStackTrace();
         }
 
-        System.out.println(rooms);
+        //System.out.println(rooms);
         //create the world with all of the rooms
         World world = new World(rooms);
 
@@ -153,55 +153,69 @@ public class ReadWorldDataFile {
         Room room = rooms.get(nodeNum);
         rooms.remove(nodeNum);
 
-        //add pickups to room inventories
-
-        //
-        //important
-        //must make cases for each possible item
-        //also need to make classes for each pickup type
+        //should successfully initialize the room map with all the attributes to the inventories
         for (int i = 0; i < roomAttribs.size(); i++) {
             String attribute = roomAttribs.get(i);
-            ArrayList<Monster> newMonsters = new ArrayList<>();
-            Inventory newPickups = new Inventory();
+            ArrayList<Monster> newMonsters = room.getMonstersInRoom();
+            Inventory newPickups = room.getPickupsInRoom();
             switch (attribute) {
                 case "zombie":
                     newMonsters.add(new Zombie());
+                    break;
                 case "dragon":
                     newMonsters.add(new Dragon());
+                    break;
                 case "ogre":
                     newMonsters.add(new Ogre());
+                    break;
                 case "axe":
                     newPickups.add(new Axe());
+                    break;
                 case "sword":
                     newPickups.add(new Sword());
+                    break;
                 case "moneybag":
                     newPickups.add(new MoneyBag());
+                    break;
                 case "ring":
                     newPickups.add(new Ring());
+                    break;
                 case "chalice":
                     newPickups.add(new Chalice());
+                    break;
                 case "coin":
                     newPickups.add(new Coin());
+                    break;
                 case "goldbars":
                     newPickups.add(new GoldBars());
+                    break;
                 case "jewel":
                     newPickups.add(new Jewel());
+                    break;
                 case "mobile":
                     newPickups.add(new Mobile());
+                    break;
                 case "mead":
                     newPickups.add(new Mead());
+                    break;
                 case "roastboar":
                     newPickups.add(new RoastBoar());
+                    break;
                 case "bread":
                     newPickups.add(new Bread());
+                    break;
                 case "key":
                     newPickups.add(new Key());
+                    break;
                 case "lockpick":
                     newPickups.add(new LockPick());
+                    break;
                 case "start":
                     room.setIsFirst(true);
+                    break;
                 case "finish":
                     room.setIsFinal(true);
+                    break;
             }
             room.setPickupsInRoom(newPickups);
             room.setMonstersInRoom(newMonsters);

@@ -2,5 +2,5 @@ a-b
 b-c
 c-a
 a=sword, start, ogre
-b=axe
-c=dragon, chest, finish
+b=axe, zombie
+c=dragon, chalice, finish
