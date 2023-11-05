@@ -8,9 +8,12 @@ package Entities;
 public abstract class Valuable extends Consumable {
     private int value;
 
+    private boolean canBeUsed;
+
     public Valuable(String desc, int value){
         super(desc);
         this.value = value;
+        this.canBeUsed = true;
     }
 
     public int getValue() {
@@ -19,5 +22,13 @@ public abstract class Valuable extends Consumable {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public boolean getCanBeUsed() {
+        return canBeUsed;
+    }
+
+    public void setCanBeUsed(boolean canBeUsed) {
+        this.canBeUsed = canBeUsed;
     }
 }

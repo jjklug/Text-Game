@@ -5,6 +5,9 @@
 
 package gameplay;
 
+import Entities.Pickup;
+import Entities.Valuable;
+import Entities.Valuables.*;
 import org.antlr.v4.runtime.Token;
 import playercommand_grammar.*;
 import org.antlr.v4.runtime.CharStreams;
@@ -29,6 +32,7 @@ public class World {
         this.map = map;
         //finds first room and sets curr room to that room
         for(int i = 0; i < map.size(); i++){
+            //test prints
             System.out.println(map.get(i).getPickupsInRoom());
             System.out.println(map.get(i).getMonstersInRoom());
             if (map.get(i).getIsFirst() == true){
@@ -124,32 +128,43 @@ public class World {
             case "door":
                 int commandArgDoor = Integer.parseInt(commandArg);
                 //door(commandArgDoor);
+                break;
             case "pickup":
                 //pickup(commandArg);
+                break;
             case "exit":
                 exit();
+                break;
             case "describe":
-
+                describe();
+                break;
             case "admire":
-
+                //admire(commandArg);
+                break;
             case "eat":
-
+                //eat(commandArg);
+                break;
             case "stats":
-
+                //stats();
+                break;
             case "wield":
-
+                break;
             case "open":
-
+                //open(commandArg);
+                break;
             case "help":
-
+                helpExplore();
+                break;
         }
     }
 
-//    private void door(int doorNum){
-//
-//    }
-//
+    private void door(int doorNum){
+        System.out.println("You open the door to the next room...\nWhat will you find??");
+        currRoom = currRoom.getConnectingRooms().get(doorNum-1);    //returns a new room from the lit of connecting rooms
+        onEnterRoom();
+    }
 
+    //may need to add condition to let user know the option that is the previous room
     /**
      * exit method that prints the options for exits to the current room
      */
@@ -175,9 +190,42 @@ public class World {
         System.out.println("You also see " + currRoom.getConnectingRooms().size() + " doors that could be exits.");
     }
 
-//    private void admire(String valuable){
+    private void admire(String valuable){
+//        Valuable item;
+//        switch(valuable){
+//            case "moneybag":
+//                item = new MoneyBag();
+//                break;
+//            case "ring":
+//                item = new Ring();
+//                break;
+//            case "chalice":
+//                item = new Chalice();
+//                break;
+//            case "coin":
+//                item = new Coin();
+//                break;
+//            case "goldbars":
+//                item = new GoldBars();
+//                break;
+//            case "jewel":
+//                item = new Jewel();
+//                break;
+//            case "mobile":
+//                item = new Mobile();
+//                break;
+//        }
+//        Pickup p = player.getInventory().select(valuable);
+//        if (p != null){
 //
-//    }
+//        }
+//        for(int i = 0; i <= player.getInventory().getItems().length; i++){
+//            if(player.getInventory().getItems()[i].equals() && player.getInventory().getItems().[i].getCanBeUsed == true){
+//                player.getInventory().getItems().[i].getCanBeUsed = false;
+//
+//            }
+//        }
+    }
 
 //    private void eat(String food){
 //
@@ -278,11 +326,12 @@ public class World {
         //
         switch (command){
             case "wield":
-
+                break;
             case "help":
-
+                helpBattle();
+                break;
             case "attack":
-
+                break;
         }
     }
     //--------------------------------------------------------
@@ -300,7 +349,7 @@ public class World {
         System.out.println("wield weapon - Player wields weapon from inventory for battle");
         System.out.println("help - Displays commands in this mode");
     }
-    private void attack(){
+    private void attack() {
 
     }
 

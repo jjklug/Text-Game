@@ -44,10 +44,13 @@ public class ReadWorldDataFile {
                 mv.visit(tree);
                 String node = mv.leftNode;
                 String node2 = mv.rightNode;
+
+                //test print statements
                 System.out.println(node);
                 System.out.println(node2);
                 ArrayList<String> roomAttribs = mv.roomAttribs;
                 System.out.println(roomAttribs);
+
 
                 //if the line is a connection statement then add the missing connections
                 if(node2 != null) {

@@ -37,7 +37,7 @@ public class Player extends Character
         this.confidence = c;
     }
 
-    public Inventory getInventory(){ return this.inventory};
+    public Inventory getInventory(){ return this.inventory; };
 
     public void setInventory(Inventory inventory){
         this.inventory = inventory;
