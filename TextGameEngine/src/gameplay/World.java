@@ -5,6 +5,7 @@
 
 package gameplay;
 
+import java.util.Random;
 import Entities.*;
 import Entities.Valuables.*;
 import org.antlr.v4.runtime.Token;
@@ -28,6 +29,10 @@ public class World {
     ArrayList<Room> map;
 
     Room currRoom;
+
+    Monster currMonster;
+
+
     public World(ArrayList<Room> map){
         this.map = map;
         //finds first room and sets curr room to that room
@@ -44,9 +49,21 @@ public class World {
 
 
     //--------------------------------------------------------
+
+    /**
+     * the method that will say what happens when a user enters a room
+     *
+     */
     public void onEnterRoom()
     {
-
+        int prob;
+        for(int i = 0; i <= currRoom.getMonstersInRoom().size(); i++){
+            prob = currRoom.getMonstersInRoom().get(i).getProb();
+            if(new Random().nextInt(100) < prob){
+                mode = PlayMode.battle;
+                currMonster = currRoom.getMonstersInRoom().get(i);
+            }
+        }
     }
     //--------------------------------------------------------
     public void play(Player player)
@@ -64,7 +81,7 @@ public class World {
                     //processExploreUserInput();
                     break;
                 case battle:
-                    //processBattleUserInput();
+                    //gameInProgress = processBattleUserInput();
                     break;
             }
         }
@@ -130,7 +147,7 @@ public class World {
                 door(commandArgDoor);
                 break;
             case "pickup":
-                //pickup(commandArg);
+                pickup(commandArg);
                 break;
             case "exit":
                 exit();
@@ -142,15 +159,16 @@ public class World {
                 admire(commandArg);
                 break;
             case "eat":
-                //eat(commandArg);
+                eat(commandArg);
                 break;
             case "stats":
-                //stats();
+                stats();
                 break;
             case "wield":
+                wield(commandArg);
                 break;
             case "open":
-                //open(commandArg);
+                open(commandArg);
                 break;
             case "help":
                 helpExplore();
@@ -158,10 +176,35 @@ public class World {
         }
     }
 
+    /**
+     * door method that allows users to open and go in the next rooms
+     * @param doorNum the int that represents the chosen room the user will go in next
+     */
     private void door(int doorNum){
         System.out.println("You open the door to the next room...\nWhat will you find??");
         currRoom = currRoom.getConnectingRooms().get(doorNum-1);    //returns a new room from the lit of connecting rooms
         onEnterRoom();
+    }
+
+    /**
+     * pickup method that allows users to pickup things in current room
+     * @param pickup string that is what the user typed in to pickup
+     */
+    private void pickup(String pickup){
+        //setup for inventory changes
+        Inventory invRoom = currRoom.getPickupsInRoom();
+        Inventory invPlayer = player.getInventory();
+        Pickup p = invRoom.select(pickup);
+        if(p != null){
+            //adds to player inv
+            invPlayer.add(p);
+            System.out.println("You have picked up " + pickup + " and added it to your inventory.");
+            player.setInventory(invPlayer); //sets player inv to the new inv
+        }else{
+            //if pickup entered is not in room inventory
+            System.out.println("You cannot pick up " + pickup + " because it is not in the room.");
+        }
+
     }
 
     //may need to add condition to let user know the option that is the previous room
@@ -190,23 +233,49 @@ public class World {
         System.out.println("You also see " + currRoom.getConnectingRooms().size() + " doors that could be exits.");
     }
 
+    /**
+     * method that allows user to admire his loot to gain confidence points back
+     * @param valuable string that the user enters in that will be an admirable valuable
+     */
     private void admire(String valuable){
-        Pickup pickup = player.getInventory().select(valuable);
-        player.set
-        if(pickup instanceof Valuable && ((Valuable) pickup).getIsConsumed() == false){
-            ((Valuable) pickup).setIsConsumed(true);
-            player.setConfidence(player.getConfidence()+ ((Valuable) pickup).getValue());
+        //sets up new inventory
+        Inventory inv = player.getInventory();
+        Pickup pickup = inv.select(valuable);
+        inv.remove(pickup);
+        if(pickup != null && pickup instanceof Valuable && ((Valuable) pickup).getIsConsumed() == false){
+            ((Valuable) pickup).setIsConsumed(true);    //changes var so the valuable cannot be consumed again
+            player.setConfidence(player.getConfidence()+ ((Valuable) pickup).getValue());   //changes player confidence to new level
             System.out.println("You have admired your " + valuable + " to gain " + ((Valuable) pickup).getValue() + " Confidence points.");
             System.out.println("You now have a total of " + player.getConfidence() + " confidence points.");
+            //set the players inv to the new one with the pickup that is set to already consumed
+            inv.add(pickup);
+            player.setInventory(inv);
         } else{
-            System.out.println("You have already admired your " + valuable + "!");
+            //if the pickup is not a valuable or already admired or not in inventory
+            System.out.println("You cannot admire " + valuable + "!");
+            System.out.println("It might not be in your inventory or it could be already admired.")
         }
     }
 
+    /**
+     * This method will be used to allow the user to feed themselves in the game and regain health
+     * @param food string that is the argument entered in by the user that will be the food that is trying to be eaten
+     */
     private void eat(String food){
-        Pickup p = player.getInventory().select(food);
-        if(p instanceof Food){
-            player.getInve
+        //sets up new inventory
+        Inventory inv = player.getInventory();
+        Pickup p = inv.select(food);
+        if(p != null && p instanceof Food ){
+            ((Food) p).setHp(player.getHp() + ((Food) p).getHp());  //sets new hp to food value + existing hp
+            System.out.println("You have eaten your " + food + " to gain " + ((Food) p).getHp() + " health points.");
+            System.out.println("You now have a total of " + player.getHp() + " health points.");
+            //new inventory without the used food becomes the player's new inventory
+            inv.remove(p);
+            player.setInventory(inv);
+        } else{
+            //if the pickup is not food or not in inventory
+            System.out.println("You cannot eat " + food + "!");
+            System.out.println("It might not be in your inventory.")
         }
     }
 
@@ -220,13 +289,42 @@ public class World {
         System.out.println("Inventory: " + player.getInventory());
     }
 
-//    private void wieldExplore(String weapon){
-//
-//    }
-//
-//    private void open(String chest){
-//
-//    }
+    /**
+     * method to change the current weapon you are wielding while in explore mode
+     * @param weapon string to represent the name of the weapon the user wants to wield
+     */
+    private void wield(String weapon){
+        Inventory inv = player.getInventory();
+        Pickup p = inv.select(weapon);
+        if(p != null && p instanceof Wieldable){
+            System.out.println("You were wielding your " + player.getWeapon().getId() + ".");
+            player.setWeapon((Wieldable) p);
+            System.out.println("You are now wielding your " + weapon + "!");
+        } else{
+            //either the pickup is not a weapon or it is not in your inventory
+            System.out.println("You cannot wield " + weapon + "!\n You also may not have it in your inventory.");
+        }
+    }
+
+    private void open(String chest){
+        //inv setup
+        Inventory inv = player.getInventory();
+        Pickup p = inv.select(chest);
+        //make sure it has a lockpick or key to open the chest
+        Pickup lockpick = inv.select("lock pick");
+        Pickup key = inv.select("key");
+        if(p != null && p instanceof Openable && (lockpick != null || key != null)){
+            System.out.println("You opened a " + chest + " and it had a " + ((Openable) p).getContents() + " inside of it!");
+            //adds chest contents and removes chest
+            inv.add(((Openable) p).getContents());
+            inv.remove(p);
+            inv.remove(unlocker);
+            player.setInventory(inv);   //sets new inv
+        }else{
+            //if user input is wrong
+            System.out.println("You cannot open a " + chest + ".\n You also may not have it in your inventory.");
+        }
+    }
 
     /**
      * displays all commands for the explore mode
@@ -253,7 +351,7 @@ public class World {
     /**
      * processes user input for battle mode
      */
-    private void processBattleUserInput(){
+    private boolean processBattleUserInput(){
 
         //initial variables
         String command = "";
@@ -305,20 +403,18 @@ public class World {
         //
         switch (command){
             case "wield":
+                wield(commandArg);
                 break;
             case "help":
                 helpBattle();
                 break;
             case "attack":
-                break;
+                return attack();
         }
+        return true;
     }
     //--------------------------------------------------------
     //methods that correspond to proper battle mode commands
-    private void wieldBattle(String weapon){
-
-    }
-
     /**
      * displays battle mode commands
      */
@@ -328,8 +424,30 @@ public class World {
         System.out.println("wield weapon - Player wields weapon from inventory for battle");
         System.out.println("help - Displays commands in this mode");
     }
-    private void attack() {
 
+    /**
+     * attack method that will simulate the user attacking a monster
+     */
+    private boolean attack() {
+        //attacks monster
+        System.out.println("You have attacked the monster dealing " + currMonster.defendAttack(player) + " damage.");
+        if(currMonster.getHp() > 0){
+            System.out.println("The " + currMonster.getId() + " has " + currMonster.getHp() + " health points left.");
+            System.out.println("The monster then attacked back and dealt " + player.defendAttack(currMonster) + "damage.");
+            if(player.getHp() > 0){
+                System.out.println("This leaves you with " + player.getHp() + " health points left.");
+            }else{
+                //user dies
+                System.out.println("You have died.");
+                System.out.println("Game Over!");
+                return false;
+            }
+        }else{
+            System.out.println("You have killed the " + currMonster.getId() + "!");
+            //record
+        }
+        System.out.println("What will you do next?");
+        return true;
     }
 
 
