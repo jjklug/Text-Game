@@ -5,8 +5,7 @@
 
 package gameplay;
 
-import Entities.Pickup;
-import Entities.Valuable;
+import Entities.*;
 import Entities.Valuables.*;
 import org.antlr.v4.runtime.Token;
 import playercommand_grammar.*;
@@ -15,6 +14,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 import java.io.*;
 
@@ -127,7 +127,7 @@ public class World {
         switch (command){
             case "door":
                 int commandArgDoor = Integer.parseInt(commandArg);
-                //door(commandArgDoor);
+                door(commandArgDoor);
                 break;
             case "pickup":
                 //pickup(commandArg);
@@ -139,7 +139,7 @@ public class World {
                 describe();
                 break;
             case "admire":
-                //admire(commandArg);
+                admire(commandArg);
                 break;
             case "eat":
                 //eat(commandArg);
@@ -191,45 +191,24 @@ public class World {
     }
 
     private void admire(String valuable){
-//        Valuable item;
-//        switch(valuable){
-//            case "moneybag":
-//                item = new MoneyBag();
-//                break;
-//            case "ring":
-//                item = new Ring();
-//                break;
-//            case "chalice":
-//                item = new Chalice();
-//                break;
-//            case "coin":
-//                item = new Coin();
-//                break;
-//            case "goldbars":
-//                item = new GoldBars();
-//                break;
-//            case "jewel":
-//                item = new Jewel();
-//                break;
-//            case "mobile":
-//                item = new Mobile();
-//                break;
-//        }
-//        Pickup p = player.getInventory().select(valuable);
-//        if (p != null){
-//
-//        }
-//        for(int i = 0; i <= player.getInventory().getItems().length; i++){
-//            if(player.getInventory().getItems()[i].equals() && player.getInventory().getItems().[i].getCanBeUsed == true){
-//                player.getInventory().getItems().[i].getCanBeUsed = false;
-//
-//            }
-//        }
+        Pickup pickup = player.getInventory().select(valuable);
+        player.set
+        if(pickup instanceof Valuable && ((Valuable) pickup).getIsConsumed() == false){
+            ((Valuable) pickup).setIsConsumed(true);
+            player.setConfidence(player.getConfidence()+ ((Valuable) pickup).getValue());
+            System.out.println("You have admired your " + valuable + " to gain " + ((Valuable) pickup).getValue() + " Confidence points.");
+            System.out.println("You now have a total of " + player.getConfidence() + " confidence points.");
+        } else{
+            System.out.println("You have already admired your " + valuable + "!");
+        }
     }
 
-//    private void eat(String food){
-//
-//    }
+    private void eat(String food){
+        Pickup p = player.getInventory().select(food);
+        if(p instanceof Food){
+            player.getInve
+        }
+    }
 
     /**
      * prints out current player stats including health, confidence, and inventory

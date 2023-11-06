@@ -41,18 +41,6 @@ public class GameMapBaseListener implements GameMapListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlank(GameMapParser.BlankContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBlank(GameMapParser.BlankContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterStates(GameMapParser.StatesContext ctx) { }
 	/**
 	 * {@inheritDoc}

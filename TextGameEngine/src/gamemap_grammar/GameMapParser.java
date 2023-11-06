@@ -167,24 +167,6 @@ public class GameMapParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class BlankContext extends MapContext {
-		public TerminalNode NEWLINE() { return getToken(GameMapParser.NEWLINE, 0); }
-		public BlankContext(MapContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).enterBlank(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).exitBlank(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof GameMapVisitor ) return ((GameMapVisitor<? extends T>)visitor).visitBlank(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
 	public static class GameMapContext extends MapContext {
 		public State_listContext state_list() {
 			return getRuleContext(State_listContext.class,0);
@@ -210,27 +192,13 @@ public class GameMapParser extends Parser {
 		MapContext _localctx = new MapContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_map);
 		try {
-			setState(27);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
-			case 1:
-				_localctx = new GameMapContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(23);
-				state_list();
-				setState(24);
-				match(NEWLINE);
-				}
-				break;
-			case 2:
-				_localctx = new BlankContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(26);
-				match(NEWLINE);
-				}
-				break;
+			_localctx = new GameMapContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(23);
+			state_list();
+			setState(24);
+			match(NEWLINE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -288,27 +256,27 @@ public class GameMapParser extends Parser {
 			_localctx = new StatesContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(35);
+			setState(32);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==ID) {
 				{
 				{
-				setState(29);
+				setState(26);
 				stat();
-				setState(31);
+				setState(28);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__0) {
 					{
-					setState(30);
+					setState(27);
 					match(T__0);
 					}
 				}
 
 				}
 				}
-				setState(37);
+				setState(34);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -382,14 +350,14 @@ public class GameMapParser extends Parser {
 		StatContext _localctx = new StatContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_stat);
 		try {
-			setState(40);
+			setState(37);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				_localctx = new EdgesContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(38);
+				setState(35);
 				edge_stmt();
 				}
 				break;
@@ -397,7 +365,7 @@ public class GameMapParser extends Parser {
 				_localctx = new AttributesContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(39);
+				setState(36);
 				attr_stmt();
 				}
 				break;
@@ -457,15 +425,15 @@ public class GameMapParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(42);
+			setState(39);
 			match(ID);
 			}
-			setState(44);
+			setState(41);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==CON) {
 				{
-				setState(43);
+				setState(40);
 				edgeRHS();
 				}
 			}
@@ -525,10 +493,10 @@ public class GameMapParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(46);
+			setState(43);
 			edgeop();
 			{
-			setState(47);
+			setState(44);
 			match(ID);
 			}
 			}
@@ -573,7 +541,7 @@ public class GameMapParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(49);
+			setState(46);
 			match(CON);
 			}
 		}
@@ -618,7 +586,7 @@ public class GameMapParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51);
+			setState(48);
 			attr_list();
 			}
 		}
@@ -676,7 +644,7 @@ public class GameMapParser extends Parser {
 			_localctx = new NodePickupsContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61); 
+			setState(58); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -684,26 +652,26 @@ public class GameMapParser extends Parser {
 				case 1:
 					{
 					{
-					setState(53);
+					setState(50);
 					match(ID);
-					setState(56);
+					setState(53);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==T__1) {
 						{
-						setState(54);
+						setState(51);
 						match(T__1);
-						setState(55);
+						setState(52);
 						match(ID);
 						}
 					}
 
-					setState(59);
+					setState(56);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==T__2) {
 						{
-						setState(58);
+						setState(55);
 						match(T__2);
 						}
 					}
@@ -714,9 +682,9 @@ public class GameMapParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(63); 
+				setState(60); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -732,44 +700,42 @@ public class GameMapParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\nB\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\n?\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0001\u0000\u0004\u0000\u0014\b\u0000\u000b\u0000\f\u0000\u0015"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001\u001c\b\u0001"+
-		"\u0001\u0002\u0001\u0002\u0003\u0002 \b\u0002\u0005\u0002\"\b\u0002\n"+
-		"\u0002\f\u0002%\t\u0002\u0001\u0003\u0001\u0003\u0003\u0003)\b\u0003\u0001"+
-		"\u0004\u0001\u0004\u0003\u0004-\b\u0004\u0001\u0005\u0001\u0005\u0001"+
-		"\u0005\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\b\u0001\b"+
-		"\u0001\b\u0003\b9\b\b\u0001\b\u0003\b<\b\b\u0004\b>\b\b\u000b\b\f\b?\u0001"+
-		"\b\u0000\u0000\t\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0000\u0000"+
-		"A\u0000\u0013\u0001\u0000\u0000\u0000\u0002\u001b\u0001\u0000\u0000\u0000"+
-		"\u0004#\u0001\u0000\u0000\u0000\u0006(\u0001\u0000\u0000\u0000\b*\u0001"+
-		"\u0000\u0000\u0000\n.\u0001\u0000\u0000\u0000\f1\u0001\u0000\u0000\u0000"+
-		"\u000e3\u0001\u0000\u0000\u0000\u0010=\u0001\u0000\u0000\u0000\u0012\u0014"+
-		"\u0003\u0002\u0001\u0000\u0013\u0012\u0001\u0000\u0000\u0000\u0014\u0015"+
-		"\u0001\u0000\u0000\u0000\u0015\u0013\u0001\u0000\u0000\u0000\u0015\u0016"+
-		"\u0001\u0000\u0000\u0000\u0016\u0001\u0001\u0000\u0000\u0000\u0017\u0018"+
-		"\u0003\u0004\u0002\u0000\u0018\u0019\u0005\b\u0000\u0000\u0019\u001c\u0001"+
-		"\u0000\u0000\u0000\u001a\u001c\u0005\b\u0000\u0000\u001b\u0017\u0001\u0000"+
-		"\u0000\u0000\u001b\u001a\u0001\u0000\u0000\u0000\u001c\u0003\u0001\u0000"+
-		"\u0000\u0000\u001d\u001f\u0003\u0006\u0003\u0000\u001e \u0005\u0001\u0000"+
-		"\u0000\u001f\u001e\u0001\u0000\u0000\u0000\u001f \u0001\u0000\u0000\u0000"+
-		" \"\u0001\u0000\u0000\u0000!\u001d\u0001\u0000\u0000\u0000\"%\u0001\u0000"+
-		"\u0000\u0000#!\u0001\u0000\u0000\u0000#$\u0001\u0000\u0000\u0000$\u0005"+
-		"\u0001\u0000\u0000\u0000%#\u0001\u0000\u0000\u0000&)\u0003\b\u0004\u0000"+
-		"\')\u0003\u000e\u0007\u0000(&\u0001\u0000\u0000\u0000(\'\u0001\u0000\u0000"+
-		"\u0000)\u0007\u0001\u0000\u0000\u0000*,\u0005\u0007\u0000\u0000+-\u0003"+
-		"\n\u0005\u0000,+\u0001\u0000\u0000\u0000,-\u0001\u0000\u0000\u0000-\t"+
-		"\u0001\u0000\u0000\u0000./\u0003\f\u0006\u0000/0\u0005\u0007\u0000\u0000"+
-		"0\u000b\u0001\u0000\u0000\u000012\u0005\u0004\u0000\u00002\r\u0001\u0000"+
-		"\u0000\u000034\u0003\u0010\b\u00004\u000f\u0001\u0000\u0000\u000058\u0005"+
-		"\u0007\u0000\u000067\u0005\u0002\u0000\u000079\u0005\u0007\u0000\u0000"+
-		"86\u0001\u0000\u0000\u000089\u0001\u0000\u0000\u00009;\u0001\u0000\u0000"+
-		"\u0000:<\u0005\u0003\u0000\u0000;:\u0001\u0000\u0000\u0000;<\u0001\u0000"+
-		"\u0000\u0000<>\u0001\u0000\u0000\u0000=5\u0001\u0000\u0000\u0000>?\u0001"+
-		"\u0000\u0000\u0000?=\u0001\u0000\u0000\u0000?@\u0001\u0000\u0000\u0000"+
-		"@\u0011\u0001\u0000\u0000\u0000\t\u0015\u001b\u001f#(,8;?";
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0003\u0002"+
+		"\u001d\b\u0002\u0005\u0002\u001f\b\u0002\n\u0002\f\u0002\"\t\u0002\u0001"+
+		"\u0003\u0001\u0003\u0003\u0003&\b\u0003\u0001\u0004\u0001\u0004\u0003"+
+		"\u0004*\b\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001"+
+		"\u0006\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001\b\u0003\b6\b\b\u0001"+
+		"\b\u0003\b9\b\b\u0004\b;\b\b\u000b\b\f\b<\u0001\b\u0000\u0000\t\u0000"+
+		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0000\u0000=\u0000\u0013\u0001\u0000"+
+		"\u0000\u0000\u0002\u0017\u0001\u0000\u0000\u0000\u0004 \u0001\u0000\u0000"+
+		"\u0000\u0006%\u0001\u0000\u0000\u0000\b\'\u0001\u0000\u0000\u0000\n+\u0001"+
+		"\u0000\u0000\u0000\f.\u0001\u0000\u0000\u0000\u000e0\u0001\u0000\u0000"+
+		"\u0000\u0010:\u0001\u0000\u0000\u0000\u0012\u0014\u0003\u0002\u0001\u0000"+
+		"\u0013\u0012\u0001\u0000\u0000\u0000\u0014\u0015\u0001\u0000\u0000\u0000"+
+		"\u0015\u0013\u0001\u0000\u0000\u0000\u0015\u0016\u0001\u0000\u0000\u0000"+
+		"\u0016\u0001\u0001\u0000\u0000\u0000\u0017\u0018\u0003\u0004\u0002\u0000"+
+		"\u0018\u0019\u0005\b\u0000\u0000\u0019\u0003\u0001\u0000\u0000\u0000\u001a"+
+		"\u001c\u0003\u0006\u0003\u0000\u001b\u001d\u0005\u0001\u0000\u0000\u001c"+
+		"\u001b\u0001\u0000\u0000\u0000\u001c\u001d\u0001\u0000\u0000\u0000\u001d"+
+		"\u001f\u0001\u0000\u0000\u0000\u001e\u001a\u0001\u0000\u0000\u0000\u001f"+
+		"\"\u0001\u0000\u0000\u0000 \u001e\u0001\u0000\u0000\u0000 !\u0001\u0000"+
+		"\u0000\u0000!\u0005\u0001\u0000\u0000\u0000\" \u0001\u0000\u0000\u0000"+
+		"#&\u0003\b\u0004\u0000$&\u0003\u000e\u0007\u0000%#\u0001\u0000\u0000\u0000"+
+		"%$\u0001\u0000\u0000\u0000&\u0007\u0001\u0000\u0000\u0000\')\u0005\u0007"+
+		"\u0000\u0000(*\u0003\n\u0005\u0000)(\u0001\u0000\u0000\u0000)*\u0001\u0000"+
+		"\u0000\u0000*\t\u0001\u0000\u0000\u0000+,\u0003\f\u0006\u0000,-\u0005"+
+		"\u0007\u0000\u0000-\u000b\u0001\u0000\u0000\u0000./\u0005\u0004\u0000"+
+		"\u0000/\r\u0001\u0000\u0000\u000001\u0003\u0010\b\u00001\u000f\u0001\u0000"+
+		"\u0000\u000025\u0005\u0007\u0000\u000034\u0005\u0002\u0000\u000046\u0005"+
+		"\u0007\u0000\u000053\u0001\u0000\u0000\u000056\u0001\u0000\u0000\u0000"+
+		"68\u0001\u0000\u0000\u000079\u0005\u0003\u0000\u000087\u0001\u0000\u0000"+
+		"\u000089\u0001\u0000\u0000\u00009;\u0001\u0000\u0000\u0000:2\u0001\u0000"+
+		"\u0000\u0000;<\u0001\u0000\u0000\u0000<:\u0001\u0000\u0000\u0000<=\u0001"+
+		"\u0000\u0000\u0000=\u0011\u0001\u0000\u0000\u0000\b\u0015\u001c %)58<";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
