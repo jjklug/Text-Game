@@ -40,9 +40,6 @@ public class World {
         this.mode = PlayMode.explore;
         //finds first room and sets curr room to that room
         for(int i = 0; i < map.size(); i++){
-            //test prints
-            System.out.println(map.get(i).getPickupsInRoom());
-            System.out.println(map.get(i).getMonstersInRoom());
             if (map.get(i).getIsFirst() == true){
                 this.currRoom = map.get(i);
             }
