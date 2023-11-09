@@ -30,6 +30,8 @@ public class World {
 
     Room currRoom;
 
+    Room prevRoom;
+
     Monster currMonster;
 
 
@@ -101,7 +103,7 @@ public class World {
         //initial variables
         String command = "";
         String commandDirection = null;
-        Token token;
+        Token token = null;
         int commandIndex;
         String input = "";
         int commandDirectionIndex = 0;
@@ -147,44 +149,34 @@ public class World {
         //goes through all possible commands and decides which it is
         switch (command){
             case "door":
-                //work on
                 int commandArgDoor = Integer.parseInt(commandArg);
                 door(commandArgDoor);
                 break;
             case "pickup":
-                //works
                 pickup(commandArg);
                 break;
             case "exit":
-                //work on
                 exit();
                 break;
             case "describe":
-                //works
                 describe();
                 break;
             case "admire":
-                //works
                 admire(commandArg);
                 break;
             case "eat":
-                //works
                 eat(commandArg);
                 break;
             case "stats":
-                //works
                 stats();
                 break;
             case "wield":
-                //works
                 wield(commandArg);
                 break;
             case "open":
-                //needs work
                 open(commandArg);
                 break;
             case "help":
-                //works
                 helpExplore();
                 break;
         }
@@ -196,6 +188,7 @@ public class World {
      */
     private void door(int doorNum){
         System.out.println("You open the door to the next room...\nWhat will you find??");
+        prevRoom = currRoom;
         currRoom = currRoom.getConnectingRooms().get(doorNum-1);    //returns a new room from the lit of connecting rooms
         onEnterRoom();
     }
@@ -212,8 +205,10 @@ public class World {
         if(p != null){
             //adds to player inv
             invPlayer.add(p);
+            invRoom.remove(p);
             System.out.println("You have picked up " + pickup + " and added it to your inventory.");
             player.setInventory(invPlayer); //sets player inv to the new inv
+            currRoom.setPickupsInRoom(invRoom);
         }else{
             //if pickup entered is not in room inventory
             System.out.println("You cannot pick up " + pickup + " because it is not in the room.");
@@ -221,7 +216,6 @@ public class World {
 
     }
 
-    //may need to add condition to let user know the option that is the previous room
     /**
      * exit method that prints the options for exits to the current room
      */
@@ -229,9 +223,17 @@ public class World {
         System.out.println("\n You begin to search for a way out of this room...\nThe exits are labelled: ");
         for(int i = 0; i < currRoom.getConnectingRooms().size(); i++){
             if(i != currRoom.getConnectingRooms().size()-1){
-                System.out.print("Door " + i+1 + ",");
+                if(prevRoom != null && prevRoom == currRoom.getConnectingRooms().get(i)){
+                    System.out.print("Door " + (i+1) + "(previous room), ");
+                }else {
+                    System.out.print("Door " + (i + 1) + ", ");
+                }
             }else{
-                System.out.print("Door " + i+1 + ".");
+                if(prevRoom != null && prevRoom == currRoom.getConnectingRooms().get(i)){
+                    System.out.print("Door " + (i+1) + "(previous room).\n");
+                }else {
+                    System.out.print("Door " + (i + 1) + ".\n");
+                }
             }
 
         }
@@ -314,7 +316,6 @@ public class World {
      */
     private void wield(String weapon){
         Inventory inv = player.getInventory();
-        System.out.println(player.getInventory());
         Pickup p = inv.select(weapon);
         if(p != null && p instanceof Wieldable){
             System.out.println("You were wielding your " + player.getWeapon() + ".");
@@ -403,7 +404,7 @@ public class World {
         //validates using token indices and lexer rules to make sure it is a proper command
         while(!valid) {
             commandIndex = -1;
-            while (commandIndex >= 11 || commandIndex <= -1) {
+            while (commandIndex >= 12 || commandIndex <= -1) {
                 System.out.println("Enter Command(Battle Mode): ");
                 input = scanner.nextLine();
                 lexer = new PlayerCommandLexer(CharStreams.fromString(input));
@@ -416,10 +417,8 @@ public class World {
             commandDirection = token.getText();
             commandDirectionIndex = token.getType();
 
-            if(commandIndex == 2 || commandIndex == 5 || commandIndex == 6 || commandIndex == 8 || commandIndex == 9) {
+            if(commandIndex == 8) {
                 valid = (commandDirectionIndex == 12);
-            } else if(commandIndex == 1){
-                valid = (commandDirectionIndex == 13);
             } else{
                 valid = true;
             }
@@ -448,7 +447,8 @@ public class World {
                 helpBattle();
                 break;
             case "attack":
-                return attack();
+                boolean x =  attack();
+                return x;
         }
         return true;
     }
@@ -468,13 +468,15 @@ public class World {
      * attack method that will simulate the user attacking a monster
      */
     private boolean attack() {
+        ArrayList<Monster> m = currRoom.getMonstersInRoom();
         //attacks monster
         System.out.println("You have attacked the monster dealing " + currMonster.defendAttack(player) + " damage.");
         if(currMonster.getHp() > 0){
             System.out.println("The " + currMonster.getId() + " has " + currMonster.getHp() + " health points left.");
-            System.out.println("The monster then attacked back and dealt " + player.defendAttack(currMonster) + "damage.");
+            System.out.println("The monster then attacked back and dealt " + player.defendAttack(currMonster) + " damage.");
             if(player.getHp() > 0){
                 System.out.println("This leaves you with " + player.getHp() + " health points left.");
+                System.out.println("What will you do next?");
             }else{
                 //user dies
                 System.out.println("You have died.");
@@ -484,8 +486,10 @@ public class World {
         }else{
             System.out.println("You have killed the " + currMonster.getId() + "!");
             //record
+            m.remove(currMonster);
+            currRoom.setMonstersInRoom(m);
+            mode = PlayMode.explore;
         }
-        System.out.println("What will you do next?");
         return true;
     }
 

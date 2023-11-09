@@ -18,9 +18,6 @@ public abstract class Wieldable extends Pickup {
 
     public int hit(){
         int damage = this.getRandom(low, high);
-        while(damage >= low && damage <= high){
-            damage = this.getRandom(low, high);
-        }
         return damage;
     }
 }

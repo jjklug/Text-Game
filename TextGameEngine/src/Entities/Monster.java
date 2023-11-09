@@ -38,7 +38,9 @@ public class Monster extends Character {
      * @return the random value plus the damage the monster does
      */
     public int dealAttackDamage(){
+
         int r = super.getRandom(0,10);
+
         return damage + r;
     }
 
@@ -48,9 +50,10 @@ public class Monster extends Character {
      * @return d which is the amt of damage that the monster took
      */
     public int defendAttack(Character enemy){
+
         int d = enemy.dealAttackDamage();
-        int hp = super.getHp();
-        hp -= d;
+        this.setHp(this.getHp() -d);
+
         return d;
     }
 

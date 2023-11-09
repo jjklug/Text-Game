@@ -81,9 +81,8 @@ public class Player extends Character
      */
     public int defendAttack(Character enemy){
         int d = enemy.dealAttackDamage();
-        int hp = super.getHp();
-        hp -= d;
-        confidence = confidence - d/2;
+        this.setHp(this.getHp() - d);
+        this.confidence = confidence - d/2;
         return d;
     }
 }
