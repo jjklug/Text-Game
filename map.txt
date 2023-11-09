@@ -1,6 +1,43 @@
 a-b
 b-c
-c-a
-a=sword, start, ogre
-b=axe, zombie
-c=dragon, chalice, finish
+b-d
+c-e
+c-f
+d-g
+d-h
+e-i
+e-j
+f-j
+f-k
+f-g
+g-k
+h-l
+i-m
+j-m
+k-o
+l-o
+m-n
+m-q
+n-q
+n-p
+p-q
+q-r
+o-p
+a=start, mead
+b=zombie, coin, warchest
+c=moneybag, bread
+d=axe, coin
+e=key, bread
+f=zombie, ring
+g=zombie, mead
+h=lockpick
+i=ogre, warchest
+j=zombie, roastboar
+k=ogre, treasurechest
+l=ogre, mobile, roastboar
+m=chalice
+n=ogre, goldbars
+o=sword
+p=zombie, bread
+q=dragon,jewel
+r=finish

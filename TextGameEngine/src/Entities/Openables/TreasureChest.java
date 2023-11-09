@@ -8,7 +8,7 @@ import Entities.Valuables.Jewel;
 public class TreasureChest extends Openable {
     public TreasureChest(){
 
-        super("war chest", true, new Jewel());
+        super("treasurechest", true, new Jewel());
     }
 
     public void unlockWith(Opener pickup){

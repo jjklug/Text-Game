@@ -8,7 +8,7 @@ import Entities.Wieldables.Sword;
 public class WarChest extends Openable {
     public WarChest(){
 
-        super("war chest", true, new Sword());
+        super("warchest", true, new Sword());
     }
 
     public void unlockWith(Opener pickup){

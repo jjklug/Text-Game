@@ -52,7 +52,7 @@ public class Monster extends Character {
     public int defendAttack(Character enemy){
 
         int d = enemy.dealAttackDamage();
-        this.setHp(this.getHp() -d);
+        this.setHp(this.getHp() - d);
 
         return d;
     }

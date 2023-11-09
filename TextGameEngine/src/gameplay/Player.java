@@ -29,10 +29,6 @@ public class Player extends Character
         this.weapon = new FistsOfFury();
 
         //temp
-        this.inventory.add(new Chalice());
-        this.inventory.add(new Mead());
-        this.inventory.add(new WarChest());
-        this.inventory.add(new Key());
     }
 
     public String getName(){

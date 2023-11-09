@@ -57,8 +57,13 @@ public class World {
      * the method that will say what happens when a user enters a room
      *
      */
-    public void onEnterRoom()
+    public boolean onEnterRoom()
     {
+        if(currRoom.getIsFinal() == true){
+            System.out.println("You have made it to the final room!\n You see the stairs out of the dungeon and make a run for it!");
+            System.out.println("You are finally free and back to the outside world!\n Good Job!");
+            return false;
+        }
         System.out.println("You have entered a new room!");
         int prob;
         for(int i = 0; i < currRoom.getMonstersInRoom().size(); i++){
@@ -69,6 +74,7 @@ public class World {
                 System.out.println("A " + currMonster.getId() + " is attacking you!\nPrepare for battle!");
             }
         }
+        return true;
     }
     //--------------------------------------------------------
     public void play(Player player)
@@ -80,13 +86,13 @@ public class World {
                 "Good luck adventurer!");
 
 
-        this.onEnterRoom();
 
-        boolean gameInProgress = true;
+        boolean gameInProgress = this.onEnterRoom();
+
         while (gameInProgress) {
             switch (this.mode) {
                 case explore:
-                    processExploreUserInput();
+                    gameInProgress = processExploreUserInput();
                     break;
                 case battle:
                     gameInProgress = processBattleUserInput();
@@ -98,7 +104,7 @@ public class World {
     /**
      * processes user input during explore mode
      */
-    public void processExploreUserInput(){
+    public boolean processExploreUserInput(){
 
         //initial variables
         String command = "";
@@ -150,8 +156,8 @@ public class World {
         switch (command){
             case "door":
                 int commandArgDoor = Integer.parseInt(commandArg);
-                door(commandArgDoor);
-                break;
+                boolean x = door(commandArgDoor);
+                return x;
             case "pickup":
                 pickup(commandArg);
                 break;
@@ -180,17 +186,19 @@ public class World {
                 helpExplore();
                 break;
         }
+        return true;
     }
 
     /**
      * door method that allows users to open and go in the next rooms
      * @param doorNum the int that represents the chosen room the user will go in next
      */
-    private void door(int doorNum){
+    private boolean door(int doorNum){
         System.out.println("You open the door to the next room...\nWhat will you find??");
         prevRoom = currRoom;
         currRoom = currRoom.getConnectingRooms().get(doorNum-1);    //returns a new room from the lit of connecting rooms
-        onEnterRoom();
+        boolean x = onEnterRoom();
+        return x;
     }
 
     /**
