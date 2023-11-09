@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.*;
+import Entities.Openables.TreasureChest;
+import Entities.Openables.WarChest;
 import Entities.Valuables.*;
 import Entities.Openers.*;
 import Entities.Foods.*;
@@ -46,8 +48,8 @@ public class ReadWorldDataFile {
                 String node2 = mv.rightNode;
 
                 //test print statements
-                System.out.println(node);
-                System.out.println(node2);
+                //System.out.println(node);
+                //System.out.println(node2);
                 ArrayList<String> roomAttribs = mv.roomAttribs;
                 //System.out.println(roomAttribs);
 
@@ -67,8 +69,6 @@ public class ReadWorldDataFile {
             System.out.println("File not Found!");
             e.printStackTrace();
         }
-
-        System.out.println(rooms);
         //create the world with all of the rooms
         World world = new World(rooms);
 
@@ -216,6 +216,12 @@ public class ReadWorldDataFile {
                     break;
                 case "lockpick":
                     newPickups.add(new LockPick());
+                    break;
+                case "treasurechest":
+                    newPickups.add(new TreasureChest());
+                    break;
+                case "warchest":
+                    newPickups.add(new WarChest());
                     break;
                 case "start":
                     room.setIsFirst(true);

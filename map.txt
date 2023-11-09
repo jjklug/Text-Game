@@ -24,7 +24,7 @@ p-q
 q-r
 o-p
 a=start, mead
-b=zombie, coin, warchest
+b=zombie, coin
 c=moneybag, bread
 d=axe, coin
 e=key, bread
