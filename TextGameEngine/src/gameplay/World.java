@@ -42,6 +42,7 @@ public class World {
         for(int i = 0; i < map.size(); i++){
             //test prints
             //System.out.println(map.get(i).getPickupsInRoom());
+            System.out.println(map.get(i).getDesc() + ": " + map.get(i).getConnectingRooms());
             //System.out.println(map.get(i).getMonstersInRoom());
             if (map.get(i).getIsFirst() == true){
                 this.currRoom = map.get(i);

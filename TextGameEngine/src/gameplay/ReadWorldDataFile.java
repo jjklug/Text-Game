@@ -49,7 +49,7 @@ public class ReadWorldDataFile {
                 System.out.println(node);
                 System.out.println(node2);
                 ArrayList<String> roomAttribs = mv.roomAttribs;
-                System.out.println(roomAttribs);
+                //System.out.println(roomAttribs);
 
 
                 //if the line is a connection statement then add the missing connections
@@ -68,7 +68,7 @@ public class ReadWorldDataFile {
             e.printStackTrace();
         }
 
-        //System.out.println(rooms);
+        System.out.println(rooms);
         //create the world with all of the rooms
         World world = new World(rooms);
 
@@ -84,7 +84,6 @@ public class ReadWorldDataFile {
      */
     public static ArrayList<Room> addConnections(String node, String node2, ArrayList<Room> rooms) {
         //checker for duplicates before we create new rooms to the map
-
         boolean nodeDupe = false;
         Room leftRoom;
         Room rightRoom;
@@ -94,22 +93,25 @@ public class ReadWorldDataFile {
 
         //dupe checking and setting up for adding to rooms and attributes
         for (int i = 0; i < rooms.size(); i++) {
-
             if (rooms.get(i).getDesc().equals(node)) {
                 nodeDupe = true;
                 nodeNum = i;
             }
+        }
+
+        //if no dupes create a whole new room for it
+        if(nodeDupe == false) {
+            leftRoom = new Room(node, new Inventory(), new ArrayList<Room>(), new ArrayList<Monster>());
+        }else{  //otherwise remove the old room because it will be altered with new connections
+            leftRoom = rooms.get(nodeNum);
+            rooms.remove(nodeNum);
+        }
+
+        for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i).getDesc().equals(node2)) {
                 node2Dupe = true;
                 node2Num = i;
             }
-        }
-        //if no dupes create a whole new room for it
-        if(nodeDupe == false) {
-            leftRoom = new Room(node, new Inventory(), new ArrayList<Room>(), new ArrayList<Monster>());
-        }else{  //othrwise remove the old room because it will be altered with new connections
-            leftRoom = rooms.get(nodeNum);
-            rooms.remove(nodeNum);
         }
         //same thing with right side node
         if (node2Dupe == false) {
@@ -118,6 +120,7 @@ public class ReadWorldDataFile {
             rightRoom = rooms.get(node2Num);
             rooms.remove(node2Num);
         }
+
 
         //adds new connections to their respective rooms
         ArrayList<Room> newConnectingList = leftRoom.getConnectingRooms();
@@ -131,9 +134,10 @@ public class ReadWorldDataFile {
             rightRoom.setConnectingRooms(newConnectingList);
         }
 
-        //adds the new altered nodes to the rooms list
+
         rooms.add(rightRoom);
         rooms.add(leftRoom);
+
 
         return rooms;
     }
