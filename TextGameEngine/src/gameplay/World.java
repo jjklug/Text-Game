@@ -176,6 +176,7 @@ public class World {
                 stats();
                 break;
             case "wield":
+                //works
                 wield(commandArg);
                 break;
             case "open":
@@ -330,7 +331,7 @@ public class World {
         Inventory inv = player.getInventory();
         Pickup p = inv.select(chest);
         //make sure it has a lockpick or key to open the chest
-        Pickup lockpick = inv.select("lock pick");
+        Pickup lockpick = inv.select("lockpick");
         Pickup key = inv.select("key");
         if(p != null && p instanceof Openable && (lockpick != null || key != null)){
             System.out.println("You opened a " + chest + " and it had a " + ((Openable) p).getContents() + " inside of it!");

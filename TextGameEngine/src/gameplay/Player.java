@@ -5,6 +5,7 @@ import Entities.Character;
 import Entities.*;
 import Entities.Foods.Mead;
 import Entities.Openables.WarChest;
+import Entities.Openers.Key;
 import Entities.Valuables.Chalice;
 import Entities.Wieldables.FistsOfFury;
 
@@ -31,6 +32,7 @@ public class Player extends Character
         this.inventory.add(new Chalice());
         this.inventory.add(new Mead());
         this.inventory.add(new WarChest());
+        this.inventory.add(new Key());
     }
 
     public String getName(){
