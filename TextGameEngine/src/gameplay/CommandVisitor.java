@@ -3,6 +3,7 @@ import playercommand_grammar.*;
 
 public class CommandVisitor extends PlayerCommandBaseVisitor<String>{
     String commandArg;
+
     @Override
     public String visitDoorCommand(PlayerCommandParser.DoorCommandContext ctx){
         commandArg = ctx.INT().getText();
@@ -22,6 +23,7 @@ public class CommandVisitor extends PlayerCommandBaseVisitor<String>{
 
     @Override
     public String visitDescribe(PlayerCommandParser.DescribeContext ctx){
+
         return ctx.DESCRIBE().getText();
     }
 

@@ -35,11 +35,12 @@ public class World {
 
     public World(ArrayList<Room> map){
         this.map = map;
+        this.mode = PlayMode.explore;
         //finds first room and sets curr room to that room
         for(int i = 0; i < map.size(); i++){
             //test prints
-            System.out.println(map.get(i).getPickupsInRoom());
-            System.out.println(map.get(i).getMonstersInRoom());
+            //System.out.println(map.get(i).getPickupsInRoom());
+            //System.out.println(map.get(i).getMonstersInRoom());
             if (map.get(i).getIsFirst() == true){
                 this.currRoom = map.get(i);
             }
@@ -56,12 +57,14 @@ public class World {
      */
     public void onEnterRoom()
     {
+        System.out.println("You have entered a new room!");
         int prob;
-        for(int i = 0; i <= currRoom.getMonstersInRoom().size(); i++){
+        for(int i = 0; i < currRoom.getMonstersInRoom().size(); i++){
             prob = currRoom.getMonstersInRoom().get(i).getProb();
             if(new Random().nextInt(100) < prob){
                 mode = PlayMode.battle;
                 currMonster = currRoom.getMonstersInRoom().get(i);
+                System.out.println("A " + currMonster.getId() + " is attacking you!\nPrepare for battle!");
             }
         }
     }
@@ -69,19 +72,22 @@ public class World {
     public void play(Player player)
     {
         this.player = player;
-        System.out.println("Welcome player " + player);
+        System.out.println("Welcome player " + player.getName() + " to this dungeon explorer game!");
+        System.out.println("You will be tasked with finding your way through a maze of rooms and get to the end without dying\n" +
+                "You will have to fight monsters and collect items along the way to help you on your journey!\n" +
+                "Good luck adventurer!");
 
-        System.out.println(player);
+
         this.onEnterRoom();
 
         boolean gameInProgress = true;
         while (gameInProgress) {
             switch (this.mode) {
                 case explore:
-                    //processExploreUserInput();
+                    processExploreUserInput();
                     break;
                 case battle:
-                    //gameInProgress = processBattleUserInput();
+                    gameInProgress = processBattleUserInput();
                     break;
             }
         }
@@ -94,9 +100,10 @@ public class World {
 
         //initial variables
         String command = "";
-        String commandDirection;
+        String commandDirection = null;
         Token token;
         int commandIndex;
+        String input = "";
         int commandDirectionIndex = 0;
         boolean valid = false;
         PlayerCommandLexer lexer = null;
@@ -107,7 +114,7 @@ public class World {
             commandIndex = -1;
             while (commandIndex >= 11 || commandIndex <= -1) {
                 System.out.println("Enter Command(Explore Mode): ");
-                String input = scanner.nextLine();
+                input = scanner.nextLine();
                 lexer = new PlayerCommandLexer(CharStreams.fromString(input));
                 token = lexer.nextToken();
                 command = token.getText();
@@ -128,7 +135,8 @@ public class World {
         }
 
         //creates parser and parses
-        PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
+        PlayerCommandLexer lexer2 = new PlayerCommandLexer(CharStreams.fromString(input));
+        PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer2));
         ParseTree tree = parser.prog();
         //uses visitor
         CommandVisitor commVisit = new CommandVisitor();
@@ -137,40 +145,45 @@ public class World {
         String commandArg = commVisit.commandArg;
 
         //goes through all possible commands and decides which it is
-
-        //important
-        //make individual methods for each of these cases or commands
-        //
         switch (command){
             case "door":
+                //work on
                 int commandArgDoor = Integer.parseInt(commandArg);
                 door(commandArgDoor);
                 break;
             case "pickup":
+                //works
                 pickup(commandArg);
                 break;
             case "exit":
+                //work on
                 exit();
                 break;
             case "describe":
+                //works
                 describe();
                 break;
             case "admire":
+                //works
                 admire(commandArg);
                 break;
             case "eat":
+                //works
                 eat(commandArg);
                 break;
             case "stats":
+                //works
                 stats();
                 break;
             case "wield":
                 wield(commandArg);
                 break;
             case "open":
+                //needs work
                 open(commandArg);
                 break;
             case "help":
+                //works
                 helpExplore();
                 break;
         }
@@ -253,7 +266,7 @@ public class World {
         } else{
             //if the pickup is not a valuable or already admired or not in inventory
             System.out.println("You cannot admire " + valuable + "!");
-            System.out.println("It might not be in your inventory or it could be already admired.")
+            System.out.println("It might not be in your inventory or it could be already admired.");
         }
     }
 
@@ -266,8 +279,9 @@ public class World {
         Inventory inv = player.getInventory();
         Pickup p = inv.select(food);
         if(p != null && p instanceof Food ){
-            ((Food) p).setHp(player.getHp() + ((Food) p).getHp());  //sets new hp to food value + existing hp
-            System.out.println("You have eaten your " + food + " to gain " + ((Food) p).getHp() + " health points.");
+            Food f = ((Food) p);
+            player.setHp(player.getHp() + f.getHp());  //sets new hp to food value + existing hp
+            System.out.println("You have eaten your " + food + " to gain " + f.getHp() + " health points.");
             System.out.println("You now have a total of " + player.getHp() + " health points.");
             //new inventory without the used food becomes the player's new inventory
             inv.remove(p);
@@ -275,7 +289,7 @@ public class World {
         } else{
             //if the pickup is not food or not in inventory
             System.out.println("You cannot eat " + food + "!");
-            System.out.println("It might not be in your inventory.")
+            System.out.println("It might not be in your inventory.");
         }
     }
 
@@ -286,7 +300,11 @@ public class World {
         System.out.println(player.getName() + "'s stats:");
         System.out.println("Health points: " + player.getHp());
         System.out.println("Confidence points: " + player.getConfidence());
-        System.out.println("Inventory: " + player.getInventory());
+        if(player.getInventory() != null){
+            System.out.println("Inventory: " + player.getInventory());
+        }else{
+            System.out.println("Inventory: empty");
+        }
     }
 
     /**
@@ -295,9 +313,10 @@ public class World {
      */
     private void wield(String weapon){
         Inventory inv = player.getInventory();
+        System.out.println(player.getInventory());
         Pickup p = inv.select(weapon);
         if(p != null && p instanceof Wieldable){
-            System.out.println("You were wielding your " + player.getWeapon().getId() + ".");
+            System.out.println("You were wielding your " + player.getWeapon() + ".");
             player.setWeapon((Wieldable) p);
             System.out.println("You are now wielding your " + weapon + "!");
         } else{
@@ -318,7 +337,13 @@ public class World {
             //adds chest contents and removes chest
             inv.add(((Openable) p).getContents());
             inv.remove(p);
-            inv.remove(unlocker);
+            if(lockpick == null) {
+                inv.remove(key);
+                System.out.println("It used up a key to open the chest.");
+            }else{
+                inv.remove(lockpick);
+                System.out.println("It used up a lockpick to open the chest.");
+            }
             player.setInventory(inv);   //sets new inv
         }else{
             //if user input is wrong
@@ -332,20 +357,30 @@ public class World {
     private void helpExplore(){
         System.out.println("List of possible commands in Explore mode(all case sensitive): ");
         System.out.println("door n - Opens door labeled n and enter the room");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("pickup item - Pick up an item in room and add to inventory");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("exit - Search room to find exit");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("describe - Describes the room, list pickups on the floor and number of doors\n" +
                 "available");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("admire valuable - Admire a valuable pickup in the inventory to increase confidence.\n" +
                 "The valuable may only be used once to increase confidence, but is\n" +
                 "not removed from the player’s inventory");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("eat food - Eats a food pickup in the inventory to increase health points. Once\n" +
                 "eaten, the food is removed from the player’s inventory");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("stats - Display player health and confidence points and inventory");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("wield weapon - Player wields weapon from inventory for battle");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("open chest - Opens a treasure or war chest in the inventory. The contents of the\n" +
                 "chest is placed in the player’s inventory and the chest removed");
+        System.out.println("--------------------------------------------------------------------------------");
         System.out.println("help - Displays commands in this mode");
+        System.out.println("--------------------------------------------------------------------------------");
     }
 
     /**
@@ -355,40 +390,43 @@ public class World {
 
         //initial variables
         String command = "";
-        String commandDirection;
+        String commandDirection = null;
         Token token;
         int commandIndex;
+        String input = "";
         int commandDirectionIndex = 0;
         boolean valid = false;
         PlayerCommandLexer lexer = null;
         Scanner scanner = new Scanner(System.in);
 
-        //validates using lexer indices to check if it is a valid rule
+        //validates using token indices and lexer rules to make sure it is a proper command
         while(!valid) {
             commandIndex = -1;
-            while ((commandIndex != 8 && commandIndex != 10 && commandIndex != 11)) {
-                System.out.println("Enter Command(Explore Mode): ");
-                String input = scanner.nextLine();
+            while (commandIndex >= 11 || commandIndex <= -1) {
+                System.out.println("Enter Command(Battle Mode): ");
+                input = scanner.nextLine();
                 lexer = new PlayerCommandLexer(CharStreams.fromString(input));
                 token = lexer.nextToken();
                 command = token.getText();
                 commandIndex = token.getType();
-                System.out.println(command + " " + commandIndex);
             }
 
             token = lexer.nextToken();
             commandDirection = token.getText();
             commandDirectionIndex = token.getType();
 
-            if(commandIndex == 8) {
+            if(commandIndex == 2 || commandIndex == 5 || commandIndex == 6 || commandIndex == 8 || commandIndex == 9) {
                 valid = (commandDirectionIndex == 12);
+            } else if(commandIndex == 1){
+                valid = (commandDirectionIndex == 13);
             } else{
                 valid = true;
             }
         }
 
         //creates parser and parses
-        PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer));
+        PlayerCommandLexer lexer2 = new PlayerCommandLexer(CharStreams.fromString(input));
+        PlayerCommandParser parser = new PlayerCommandParser(new CommonTokenStream(lexer2));
         ParseTree tree = parser.prog();
         //uses visitor
         CommandVisitor commVisit = new CommandVisitor();

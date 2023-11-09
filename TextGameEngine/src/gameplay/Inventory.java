@@ -15,7 +15,6 @@ public class Inventory
 	public Inventory()
 	{
 		this.items = new ArrayList<Pickup>();
-		items.add(new FistsOfFury());
 	}
 	//------------------------------------
 	public String toString()
@@ -45,7 +44,8 @@ public class Inventory
 	{
 		for(Pickup p : this.items)
 		{
-			if (p!=null && p.compareID(id))
+
+			if (p!=null && id.equals(p.getId()))
 			{
 				return p;
 			}

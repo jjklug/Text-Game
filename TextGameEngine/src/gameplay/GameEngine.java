@@ -20,7 +20,7 @@ public class GameEngine
         World world = ReadWorldDataFile.basicWorld("map.txt");
 
         Player playerOne = new Player("Sir Kendric",100,50);
-        //world.play(playerOne);
+        world.play(playerOne);
     }
 
 }

@@ -3,6 +3,10 @@ package gameplay;
 
 import Entities.Character;
 import Entities.*;
+import Entities.Foods.Mead;
+import Entities.Openables.WarChest;
+import Entities.Valuables.Chalice;
+import Entities.Wieldables.FistsOfFury;
 
 public class Player extends Character
 {
@@ -19,6 +23,14 @@ public class Player extends Character
         super("Player", hp);
         this.name = name;
         this.confidence = confidence;
+        this.inventory = new Inventory();
+        this.inventory.add(new FistsOfFury());
+        this.weapon = new FistsOfFury();
+
+        //temp
+        this.inventory.add(new Chalice());
+        this.inventory.add(new Mead());
+        this.inventory.add(new WarChest());
     }
 
     public String getName(){
